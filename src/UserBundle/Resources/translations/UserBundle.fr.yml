@@ -1,0 +1,5 @@
+profile:
+    show:
+        about: 'A propos de vous'
+    edit:
+        submit: "Soumettre"

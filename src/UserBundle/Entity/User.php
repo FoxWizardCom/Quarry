@@ -27,16 +27,9 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
-     * @Assert\Length(
-     *     min=3,
-     *     max=255,
-     *     minMessage="The name is too short.",
-     *     maxMessage="The name is too long.",
-     *     groups={"Registration", "Profile"}
-     * )
+     *
      */
-    protected $name;
+    protected $about;
 
 
     public function __construct()
@@ -58,17 +51,17 @@ class User extends BaseUser
     /**
      * @return mixed
      */
-    public function getName()
+    public function getAbout()
     {
-        return $this->name;
+        return $this->about;
     }
 
     /**
-     * @param mixed $name
+     * @param mixed $about
      */
-    public function setName($name)
+    public function setAbout($about)
     {
-        $this->name = $name;
+        $this->about = $about;
     }
 
 

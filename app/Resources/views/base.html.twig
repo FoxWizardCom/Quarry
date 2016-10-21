@@ -9,9 +9,9 @@
     </head>
     <body>
     <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href={{ path('fos_user_security_login') }}>Home</a></li>
+        <li><a href={{ path('fos_user_security_login') }}>News</a></li>
+        <li><a href={{ path('fos_user_security_login') }}>Contact</a></li>
         {% if app.user %}
             <li style="float:right"><a class="active" href={{ path('fos_user_profile_show') }}>{{ app.user.username }}</a></li>
         {% else %}
