@@ -2,4 +2,10 @@ profile:
     show:
         about: 'A propos de vous'
     edit:
-        submit: "Soumettre"
+        submit: 'Soumettre'
+
+menu:
+    login: 'se connecter'
+    register: "s'inscrire"
+    home: 'Quarry'
+    news: 'nouveautés'
