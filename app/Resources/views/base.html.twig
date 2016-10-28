@@ -8,14 +8,17 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    {% trans_default_domain "UserBundle" %}
     <ul>
         <li><a href={{ path('fos_user_security_login') }}>{{ 'menu.home'|trans }}</a></li>
         <li><a href={{ path('fos_user_security_login') }}>{{ 'menu.news'|trans }}</a></li>
         {% if app.user %}
             <li style="float:right"><a class="active" href={{ path('fos_user_profile_show') }}>{{ app.user.username }}</a></li>
         {% else %}
-            <li style="float:right"><a class="active" href={{ path('fos_user_registration_register') }}>{{ 'menu.register'|trans }}</a></li>
-            <li style="float:right"><a class="active" href={{ path('fos_user_security_login') }}>{{ 'menu.login'|trans }}</a></li>
+            <div  style="float:right">
+            <li><a class="active" href={{ path('fos_user_registration_register') }}>{{ 'menu.register'|trans }}</a></li>
+            <li><a class="active" href={{ path('fos_user_security_login') }}>{{ 'menu.login'|trans }}</a></li>
+            </div>
         {% endif %}
 
     </ul>
