@@ -4,6 +4,7 @@ namespace StoryBundle\Controller;
 
 use StoryBundle\Entity\Chapter;
 use StoryBundle\Entity\Story;
+use StoryBundle\Form\ChapterType;
 use StoryBundle\Form\StoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,9 +27,8 @@ class DefaultController extends Controller
     {
         $story = new Story();
 
-       /* $chapter = new Chapter();
-        $story->getChapters()->add($chapter);
-       */
+        $chapter = new Chapter();
+        $story->addChapter($chapter);
 
         $form = $this->createForm(StoryType::class, $story);
 
@@ -37,11 +37,12 @@ class DefaultController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($story);
+            $em->persist($chapter);
             $em->flush();
 
             return $this->render('StoryBundle:Default:form.html.twig', array('form' => $form->createView() ) );
         }
-       return $this->render('StoryBundle:Default:form.html.twig', array('form' => $form->createView() ) );
+       return $this->render('StoryBundle:Default:form.html.twig', array('form' => $form->createView()) );
 }
 
     /**

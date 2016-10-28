@@ -23,7 +23,7 @@ class Story extends StoryPart
     private $author;
 
     /**
-     * @ORM\OneToMany(targetEntity="Chapter", mappedBy="story")
+     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Chapter", mappedBy="story")
      */
     protected $chapters;
 
@@ -31,6 +31,10 @@ class Story extends StoryPart
     public function __construct()
     {
         $this->chapters = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->getTitle();
     }
 
     /**
@@ -64,5 +68,20 @@ class Story extends StoryPart
     {
         return $this->chapters;
     }
+
+    /**
+     * @param mixed $chapters
+     */
+    public function setChapters($chapters)
+    {
+        $this->chapters = $chapters;
+    }
+
+
+    public function addChapter($chapter)
+    {
+        $this->chapters->add($chapter);
+    }
+
 }
 

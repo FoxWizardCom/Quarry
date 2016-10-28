@@ -13,7 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Chapter extends StoryPart
 {
     /**
-     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Story")
+     * @ORM\ManyToOne(targetEntity="Story", inversedBy="chapters")
+     *
      */
     private $story;
 

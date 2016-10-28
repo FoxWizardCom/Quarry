@@ -24,13 +24,8 @@ class StoryType extends AbstractType
             ->add('content')
             ->add('color')
             ->add('type')
-            ->add('author');
-
-      /*  $builder->add('chapters', CollectionType::class, array(
-            'entry_type' => ChapterType::class
-        )); */
-
-
+            ->add('author')
+            ->add("chapters", CollectionType::class, array("entry_type" => ChapterType::class));
     }
     
     /**

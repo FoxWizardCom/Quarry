@@ -8,6 +8,12 @@
 {% block body %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
-        <input type="submit" value="Save">
+    <input type="submit" value="Save">
     {{ form_end(form) }}
+
+    {#{{ form_start(form_chapters) }}#}
+    {#{{ form_widget(form_chapters) }}#}
+    {#<input type="submit" value="Save">#}
+    {#{{ form_end(form_chapters) }}#}
+
 {% endblock %}
