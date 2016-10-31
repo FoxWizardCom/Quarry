@@ -2,7 +2,10 @@
 
 namespace StoryBundle\Form;
 
+use StoryBundle\Entity\Checkpoint;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +27,8 @@ class MissionType extends AbstractType
             ->add('longitude')
             ->add('radius')
             ->add('chapter')
-        ;
+            ->add('add Checkpoint', ButtonType::class)
+            ->add("checkpoints", CollectionType::class, array("entry_type" => CheckpointType::class));
     }
     
     /**

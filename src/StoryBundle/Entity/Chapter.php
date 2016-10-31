@@ -2,6 +2,7 @@
 
 namespace StoryBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,6 +20,20 @@ class Chapter extends StoryPart
     private $story;
 
     /**
+     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Mission", mappedBy="chapter")
+     */
+    protected $missions;
+
+    public function __construct()
+    {
+        $this->missions = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->getTitle();
+    }
+
+    /**
      * @return mixed
      */
     public function getStory()
@@ -34,6 +49,25 @@ class Chapter extends StoryPart
         $this->story = $story;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getMissions()
+    {
+        return $this->missions;
+    }
 
+    /**
+     * @param mixed $missions
+     */
+    public function setMissions($missions)
+    {
+        $this->missions = $missions;
+    }
+
+    public function addStoryPart(StoryPart $storyPart)
+    {
+        $this->missions->add($storyPart);
+    }
 }
 

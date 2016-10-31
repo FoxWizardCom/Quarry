@@ -185,5 +185,7 @@ abstract class StoryPart
     {
         return $this->number;
     }
+
+    public abstract function addStoryPart(StoryPart $storyPart);
 }
 

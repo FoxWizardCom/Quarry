@@ -2,6 +2,7 @@
 
 namespace StoryBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,6 +40,19 @@ class Mission extends StoryPart
      */
     private $radius;
 
+    /**
+     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Checkpoint", mappedBy="Mission")
+     */
+    protected $checkpoints;
+
+    public function __construct()
+    {
+        $this->checkpoints = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->getTitle();
+    }
 
     /**
      * Get id
@@ -113,6 +127,15 @@ class Mission extends StoryPart
     }
 
     /**
+     * @return mixed
+     */
+    public function getChapter()
+    {
+        return $this->chapter;
+    }
+
+
+    /**
      * Get radius
      *
      * @return int
@@ -120,6 +143,28 @@ class Mission extends StoryPart
     public function getRadius()
     {
         return $this->radius;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckpoints()
+    {
+        return $this->checkpoints;
+    }
+
+    /**
+     * @param mixed $checkpoints
+     */
+    public function setCheckpoints($checkpoints)
+    {
+        $this->checkpoints = $checkpoints;
+    }
+
+
+    public function addStoryPart(StoryPart $storyPart)
+    {
+        $this->checkpoints->add($storyPart);
     }
 }
 

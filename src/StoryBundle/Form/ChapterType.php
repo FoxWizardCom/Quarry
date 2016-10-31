@@ -3,6 +3,7 @@
 namespace StoryBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,7 +21,8 @@ class ChapterType extends AbstractType
             ->add('title')
             ->add('content')
             ->add('color')
-            ->add('type');
+            ->add('type')
+            ->add("missions", CollectionType::class, array("entry_type" => MissionType::class));
     }
     
     /**

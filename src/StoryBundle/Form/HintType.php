@@ -15,6 +15,7 @@ class HintType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('checkpoint')
             ->add('number')
             ->add('title')
             ->add('content')
@@ -22,9 +23,7 @@ class HintType extends AbstractType
             ->add('type')
             ->add('question')
             ->add('answer')
-            ->add('message')
-            ->add('checkpoint')
-        ;
+            ->add('message');
     }
     
     /**

@@ -77,11 +77,9 @@ class Story extends StoryPart
         $this->chapters = $chapters;
     }
 
-
-    public function addChapter($chapter)
+    public function addStoryPart(StoryPart $storyPart)
     {
-        $this->chapters->add($chapter);
+        $this->chapters->add($storyPart);
     }
-
 }
 

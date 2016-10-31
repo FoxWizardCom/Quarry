@@ -3,6 +3,9 @@
 namespace StoryBundle\Controller;
 
 use StoryBundle\Entity\Chapter;
+use StoryBundle\Entity\Checkpoint;
+use StoryBundle\Entity\Hint;
+use StoryBundle\Entity\Mission;
 use StoryBundle\Entity\Story;
 use StoryBundle\Form\ChapterType;
 use StoryBundle\Form\StoryType;
@@ -26,9 +29,15 @@ class DefaultController extends Controller
     public function createStoryAction(Request $request)
     {
         $story = new Story();
-
         $chapter = new Chapter();
-        $story->addChapter($chapter);
+        $mission = new Mission();
+        $checkpoint = new Checkpoint();
+        $hint = new Hint();
+
+        $checkpoint->addStoryPart($hint);
+        $mission->addStoryPart($checkpoint);
+        $chapter->addStoryPart($mission);
+        $story->addStoryPart($chapter);
 
         $form = $this->createForm(StoryType::class, $story);
 

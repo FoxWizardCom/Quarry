@@ -120,5 +120,18 @@ class Hint extends StoryPart
     {
         return $this->message;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCheckpoint()
+    {
+        return $this->checkpoint;
+    }
+
+    public function addStoryPart(StoryPart $storyPart)
+    {
+        // TODO: Implement addStoryPart() method.
+    }
 }
 
