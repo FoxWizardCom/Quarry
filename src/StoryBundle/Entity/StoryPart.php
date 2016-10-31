@@ -186,6 +186,7 @@ abstract class StoryPart
         return $this->number;
     }
 
-    public abstract function addStoryPart(StoryPart $storyPart);
+    public abstract function addStoryChild(StoryPart $storyPart);
+    public abstract function setStoryParent(StoryPart $storyPart);
 }
 

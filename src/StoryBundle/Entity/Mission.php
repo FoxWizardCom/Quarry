@@ -162,9 +162,14 @@ class Mission extends StoryPart
     }
 
 
-    public function addStoryPart(StoryPart $storyPart)
+    public function addStoryChild(StoryPart $storyPart)
     {
         $this->checkpoints->add($storyPart);
+    }
+
+    public function setStoryParent(StoryPart $storyPart)
+    {
+        // TODO: Implement setStoryParent() method.
     }
 }
 

@@ -65,9 +65,15 @@ class Chapter extends StoryPart
         $this->missions = $missions;
     }
 
-    public function addStoryPart(StoryPart $storyPart)
+    public function addStoryChild(StoryPart $storyPart)
     {
+        $storyPart->setStoryParent($this);
         $this->missions->add($storyPart);
+    }
+
+    public function setStoryParent(StoryPart $storyPart)
+    {
+        $this->story = $storyPart;
     }
 }
 

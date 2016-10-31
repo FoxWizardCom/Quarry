@@ -129,9 +129,14 @@ class Hint extends StoryPart
         return $this->checkpoint;
     }
 
-    public function addStoryPart(StoryPart $storyPart)
+    public function addStoryChild(StoryPart $storyPart)
     {
         // TODO: Implement addStoryPart() method.
+    }
+
+    public function setStoryParent(StoryPart $storyPart)
+    {
+        // TODO: Implement setStoryParent() method.
     }
 }
 

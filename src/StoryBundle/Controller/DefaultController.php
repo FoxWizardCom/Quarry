@@ -29,15 +29,6 @@ class DefaultController extends Controller
     public function createStoryAction(Request $request)
     {
         $story = new Story();
-        $chapter = new Chapter();
-        $mission = new Mission();
-        $checkpoint = new Checkpoint();
-        $hint = new Hint();
-
-        $checkpoint->addStoryPart($hint);
-        $mission->addStoryPart($checkpoint);
-        $chapter->addStoryPart($mission);
-        $story->addStoryPart($chapter);
 
         $form = $this->createForm(StoryType::class, $story);
 
@@ -46,7 +37,6 @@ class DefaultController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($story);
-            $em->persist($chapter);
             $em->flush();
 
             return $this->render('StoryBundle:Default:form.html.twig', array('form' => $form->createView() ) );

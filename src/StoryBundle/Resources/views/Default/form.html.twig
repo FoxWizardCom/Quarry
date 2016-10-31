@@ -2,7 +2,6 @@
 
 {% block title %}Quarry!{% endblock %}
 {% block stylesheets %}
-
 {% endblock %}
 
 {% block body %}
@@ -10,4 +9,55 @@
     {{ form_widget(form) }}
     <input type="submit" value="Save">
     {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var $collectionHolder;
+        var $collectionHolderList;
+
+        var $addChapterLink = $('<a href="#" class="add_chapter_link">Add Chapter</a>');
+        var $newLinkLi = $('<li></li>').append($addChapterLink);
+
+        jQuery(document).ready(function() {
+            $('#story_chapters').append("<ul></ul>");
+        // Get the ul that holds the collection of tags
+        $collectionHolder = $('#story_chapters');
+        $collectionHolderList = $('#story_chapters ul');
+
+        // add the "add a tag" anchor and li to the tags ul
+        $collectionHolderList.append($newLinkLi);
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolderList.data('index', $collectionHolder.find(':input').length);
+
+        $addChapterLink.on('click', function(e) {
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
+
+        addChapterForm($collectionHolder, $newLinkLi);
+        });
+        });
+
+        function addChapterForm($collectionHolder, $newLinkLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolderList.data('index');
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__label__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolderList.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
 {% endblock %}

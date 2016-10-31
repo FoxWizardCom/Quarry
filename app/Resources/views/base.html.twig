@@ -5,11 +5,12 @@
         <title>{% block title %}Quarry{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('assets/css/headerStyle.css') }}" />
         {% block stylesheets %}{% endblock %}
+        <script src="{{ asset('assets/jquery.js') }}"></script>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
     {% trans_default_domain "UserBundle" %}
-    <ul>
+    <ul id="header-menu">
         <li><a href={{ path('fos_user_security_login') }}>{{ 'menu.home'|trans }}</a></li>
         <li><a href={{ path('fos_user_security_login') }}>{{ 'menu.news'|trans }}</a></li>
         {% if app.user %}

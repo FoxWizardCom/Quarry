@@ -23,7 +23,7 @@ class Story extends StoryPart
     private $author;
 
     /**
-     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Chapter", mappedBy="story")
+     * @ORM\OneToMany(targetEntity="Chapter", mappedBy="Story", cascade={"persist"})
      */
     protected $chapters;
 
@@ -77,9 +77,14 @@ class Story extends StoryPart
         $this->chapters = $chapters;
     }
 
-    public function addStoryPart(StoryPart $storyPart)
+    public function addStoryChild(StoryPart $storyPart)
     {
         $this->chapters->add($storyPart);
+    }
+
+    public function setStoryParent(StoryPart $storyPart)
+    {
+        // TODO: Implement setStoryParent() method.
     }
 }
 
