@@ -25,7 +25,11 @@ class CheckpointType extends AbstractType
             ->add('longitude')
             ->add('radius')
             ->add('mission')
-            ->add("hints", CollectionType::class, array("entry_type" => HintType::class));
+            ->add('hints', CollectionType::class, array(
+            'entry_type' => HintType::class,
+            'allow_add' => true,
+            'attr' => array('class' => 'hint')
+            ));
     }
     
     /**

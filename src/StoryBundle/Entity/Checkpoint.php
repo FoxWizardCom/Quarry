@@ -40,7 +40,7 @@ class Checkpoint extends StoryPart
     private $radius;
 
     /**
-     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Hint", mappedBy="checkpoint")
+     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Hint", mappedBy="checkpoint", cascade={"persist"})
      */
     protected $hints;
 

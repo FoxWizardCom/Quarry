@@ -20,7 +20,7 @@ class Chapter extends StoryPart
     private $story;
 
     /**
-     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Mission", mappedBy="chapter")
+     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Mission", mappedBy="chapter", cascade={"persist"})
      */
     protected $missions;
 

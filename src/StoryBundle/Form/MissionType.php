@@ -27,8 +27,11 @@ class MissionType extends AbstractType
             ->add('longitude')
             ->add('radius')
             ->add('chapter')
-            ->add('add Checkpoint', ButtonType::class)
-            ->add("checkpoints", CollectionType::class, array("entry_type" => CheckpointType::class));
+            ->add('checkpoints', CollectionType::class, array(
+            'entry_type' => CheckpointType::class,
+            'allow_add' => true,
+            'attr' => array('class' => 'checkpoint')
+    ));
     }
     
     /**

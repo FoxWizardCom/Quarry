@@ -22,7 +22,11 @@ class ChapterType extends AbstractType
             ->add('content')
             ->add('color')
             ->add('type')
-            ->add("missions", CollectionType::class, array("entry_type" => MissionType::class));
+            ->add('missions', CollectionType::class, array(
+                'entry_type' => MissionType::class,
+                'allow_add' => true,
+                'attr' => array('class' => 'mission')
+            ));
     }
     
     /**

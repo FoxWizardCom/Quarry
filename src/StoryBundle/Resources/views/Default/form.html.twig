@@ -9,54 +9,104 @@
     {{ form_widget(form) }}
     <input type="submit" value="Save">
     {{ form_end(form) }}
-
 {% endblock %}
 
 {% block javascripts %}
     <script>
-        var $collectionHolder;
-        var $collectionHolderList;
 
-        var $addChapterLink = $('<a href="#" class="add_chapter_link">Add Chapter</a>');
-        var $newLinkLi = $('<li></li>').append($addChapterLink);
-
-        jQuery(document).ready(function() {
-            $('#story_chapters').append("<ul></ul>");
-        // Get the ul that holds the collection of tags
-        $collectionHolder = $('#story_chapters');
-        $collectionHolderList = $('#story_chapters ul');
-
-        // add the "add a tag" anchor and li to the tags ul
-        $collectionHolderList.append($newLinkLi);
-
-        // count the current form inputs we have (e.g. 2), use that as the new
-        // index when inserting a new item (e.g. 2)
-        $collectionHolderList.data('index', $collectionHolder.find(':input').length);
-
-        $addChapterLink.on('click', function(e) {
-        // prevent the link from creating a "#" on the URL
-        e.preventDefault();
-
-        addChapterForm($collectionHolder, $newLinkLi);
-        });
+        jQuery(document).ready(function(){
+            addFormButton(0, 0, 0, 0);
         });
 
-        function addChapterForm($collectionHolder, $newLinkLi) {
-            // Get the data-prototype explained earlier
-            var prototype = $collectionHolder.data('prototype');
+        function addFormButton($type, $chapterIndex, $missionIndex, $checkpointIndex) {
+            var $addLink;
+            var $collectionHolder;
 
-            // get the new index
-            var index = $collectionHolderList.data('index');
+            switch ($type){
+                case 0:
+                    $addLink = $('<a href="#" class="add_chapter_link">Add a Chapter to Story</a>');
+                    $collectionHolder = $('div#story_chapters');
+                    break;
+                case 1:
+                   $addLink = $('<a href="#" class="add_mission_link" data-chapter='+ $chapterIndex +'>Add a Mission to Chapter</a>');
+                    $collectionHolder = $('div#story_chapters_' + $chapterIndex + '_missions');
+                    break;
+                case 2:
+                   $addLink = $('<a href="#" class="add_checkpoint_link" data-chapter='+ $chapterIndex +' data-mission='+ $missionIndex +'>Add a Checkpoint to Mission</a>');
+                    $collectionHolder = $('div#story_chapters_' + $chapterIndex + '_missions_' + $missionIndex + '_checkpoints');
+                    break;
+                case 3:
+                    $addLink = $('<a href="#" class="add_hint_link" data-chapter='+ $chapterIndex +' data-mission='+ $missionIndex +' data-checkpoint='+ $checkpointIndex +'>Add a Hint to Checkpoint</a>');
+                    $collectionHolder = $('div#story_chapters_' + $chapterIndex + '_missions_' + $missionIndex + '_checkpoints_' + $checkpointIndex + '_hints');
+                    break;
+            }
+            var $newLinkLi = $('<li></li>').append($addLink);
 
-            // Replace '__name__' in the prototype's HTML to
-            // instead be a number based on how many items we have
-            var newForm = prototype.replace(/__name__label__/g, index);
+            $collectionHolder.append($newLinkLi);
+            $collectionHolder.data("index", $collectionHolder.find("input").length);
 
-            // increase the index with one for the next item
-            $collectionHolderList.data('index', index + 1);
+            $addLink.on('click', function (e) {
+                e.preventDefault();
 
-            // Display the form in the page in an li, before the "Add a tag" link li
-            var $newFormLi = $('<li></li>').append(newForm);
+                var $chapterLength = 0;
+                var $missionLength = 0;
+                var $checkpointLength = 0;
+                var $hintLength = 0;
+
+                switch ($type){
+                    case 0:
+                        $chapterLength = $collectionHolder.data('index');
+                        break;
+                    case 1:
+                        $chapterLength = $(this).data('chapter');
+                        $missionLength = $collectionHolder.data('index');
+                        break;
+                    case 2:
+                        $chapterLength = $(this).data('chapter');
+                        $missionLength = $(this).data('mission');
+                        $checkpointLength = $collectionHolder.data('index');
+                        break;
+                    case 3:
+                        $chapterLength = $(this).data('chapter');
+                        $missionLength = $(this).data('mission');
+                        $checkpointLength = $(this).data('checkpoint');
+                        $hintLength = $collectionHolder.data('index');
+                        break;
+                }
+
+                addForm($collectionHolder, $newLinkLi, $chapterLength, $missionLength, $checkpointLength, $hintLength);
+                addFormButton($type+1, $chapterLength, $missionLength, $checkpointLength);
+            });
+            return;
+        }
+
+        function addForm($collectionHolder, $newLinkLi, $chapterLength, $missionLength, $checkpointLength, $hintLength){
+            var $prototype = $collectionHolder.data('prototype');
+            var $index = $collectionHolder.data('index');
+            //var $newForm = $prototype.replace(/__name__/g, $index);
+
+            var strProto = $prototype.toString();
+
+            var chapterStr = "chapters_"+ $chapterLength;
+            var missionStr = "missions_"+ $missionLength;
+            var checkpointStr = "checkpoints_"+ $checkpointLength;
+            var hintStr = "hints_" + $hintLength;
+
+            console.log("chapter - "+ chapterStr+ "; mission - "+ missionStr+ "; checkpoint - "+ checkpointStr);
+
+            //WORKS BUT IS STRANGE
+             var $newForm = $prototype.replace(/chapters___name__/g, chapterStr);
+             $newForm = $newForm.replace(/missions___name__/g, missionStr);
+             $newForm = $newForm.replace(/missions_0/g, missionStr);
+             $newForm = $newForm.replace(/checkpoints___name__/g, checkpointStr);
+             $newForm = $newForm.replace(/checkpoints_0/g, checkpointStr);
+            $newForm = $newForm.replace(/hints___name__/g, hintStr);
+            $newForm = $newForm.replace(/hints_0/g, hintStr);
+
+
+            $collectionHolder.data('index', $index+1);
+
+            var $newFormLi = $('<li></li>').append($newForm);
             $newLinkLi.before($newFormLi);
         }
     </script>

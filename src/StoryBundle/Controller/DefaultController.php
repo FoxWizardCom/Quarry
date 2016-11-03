@@ -29,6 +29,15 @@ class DefaultController extends Controller
     public function createStoryAction(Request $request)
     {
         $story = new Story();
+       /* $chapter = array(new Chapter());
+        $mission = array(new Mission());
+        $checkpoint = array(new Checkpoint());
+        $hint = array(new Hint());
+
+        $checkpoint[0]->setHints($hint);
+        $mission[0]->setCheckpoints($checkpoint);
+        $chapter[0]->setMissions($mission);
+        $story->setChapters($chapter);*/
 
         $form = $this->createForm(StoryType::class, $story);
 

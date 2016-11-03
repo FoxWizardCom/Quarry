@@ -41,7 +41,7 @@ class Mission extends StoryPart
     private $radius;
 
     /**
-     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Checkpoint", mappedBy="Mission")
+     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Checkpoint", mappedBy="Mission", cascade={"persist"})
      */
     protected $checkpoints;
 
@@ -169,7 +169,7 @@ class Mission extends StoryPart
 
     public function setStoryParent(StoryPart $storyPart)
     {
-        // TODO: Implement setStoryParent() method.
+        $this->chapter = $storyPart;
     }
 }
 

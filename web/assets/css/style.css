@@ -1,0 +1,51 @@
+#header-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#header-menu li {
+    float: left;
+}
+
+#header-menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#header-menu li a:hover {
+    background-color: #111;
+}
+
+#header-menu .active {
+    background-color: #4CAF50;
+}
+
+form .chapter{
+    background-color: blue;
+}
+
+form .mission{
+    background-color: green;
+}
+
+form .checkpoint{
+    background-color: red;
+}
+
+form .hint{
+    background-color: purple;
+}
+
+form div{
+    padding: 0 2em;
+}
+
+a{
+    background-color: cyan;
+}
