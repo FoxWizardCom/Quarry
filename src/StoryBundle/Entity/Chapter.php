@@ -75,5 +75,10 @@ class Chapter extends StoryPart
     {
         $this->story = $storyPart;
     }
+
+    public function removeStoryChild(StoryPart $storyPart)
+    {
+        $this->missions->removeElement($storyPart);
+    }
 }
 

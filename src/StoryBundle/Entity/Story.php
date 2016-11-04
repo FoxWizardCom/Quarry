@@ -86,5 +86,10 @@ class Story extends StoryPart
     {
         // TODO: Implement setStoryParent() method.
     }
+
+    public function removeStoryChild(StoryPart $storyPart)
+    {
+       $this->chapters->removeElement($storyPart);
+    }
 }
 

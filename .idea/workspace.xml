@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="131085e7-2e32-456a-82df-628b3e1e62aa" name="Default" comment="embedded ChapterForm in StoryForm (bug: only saves last chapter)">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/assets/css/headerStyle.css" afterPath="" />
+    <list default="true" id="131085e7-2e32-456a-82df-628b3e1e62aa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Controller/DefaultController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Entity/Chapter.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Entity/Chapter.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Entity/Checkpoint.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Entity/Checkpoint.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Entity/Hint.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Entity/Hint.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Entity/Mission.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Entity/Mission.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Entity/Story.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Entity/Story.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Entity/StoryPart.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Entity/StoryPart.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Form/ChapterType.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Form/ChapterType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Form/CheckpointType.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Form/CheckpointType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Form/HintType.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Form/HintType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Form/MissionType.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Form/MissionType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Form/StoryType.php" afterPath="$PROJECT_DIR$/src/StoryBundle/Form/StoryType.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/form.html.twig" afterPath="$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/form.html.twig" />
@@ -40,6 +45,30 @@
     <option name="SHOW_TABLE_DETAILS" value="true" />
     <option name="SHOW_EMPTY_GROUPS" value="false" />
     <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - quarry@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="MySQL - quarry@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="chapter" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -50,28 +79,18 @@
       <file leaf-file-name="form.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/form.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
+            <state relative-caret-position="17">
+              <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Controller/DefaultController.php">
+      <file leaf-file-name="ChapterType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/ChapterType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Story.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Story.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="25" column="79" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="83" />
+            <state relative-caret-position="306">
+              <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -80,69 +99,87 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/assets/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
+            <state relative-caret-position="1666">
+              <caret line="98" column="1" selection-start-line="98" selection-start-column="1" selection-end-line="98" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quarry.chapter" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.chapter">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+      <file leaf-file-name="CheckpointType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/CheckpointType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="24" column="34" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="34" />
+              <folding>
+                <element signature="e#36#76#0#PHP" expanded="false" />
+              </folding>
             </state>
           </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </entry>
+      </file>
+      <file leaf-file-name="HintType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/HintType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+              <folding>
+                <element signature="e#36#76#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MissionType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/MissionType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quarry.mission" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.mission">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+      <file leaf-file-name="StoryType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/StoryType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quarry.hint" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.hint">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Controller/DefaultController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quarry.story" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.story">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+      <file leaf-file-name="Chapter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Chapter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+              <folding>
+                <element signature="e#38#86#0#PHP" expanded="false" />
+              </folding>
             </state>
           </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+        </entry>
+      </file>
+      <file leaf-file-name="Story.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Story.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+              <folding>
+                <element signature="e#38#86#0#PHP" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -214,21 +251,21 @@
         <option value="$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/map.html.twig" />
         <option value="$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/index.html.twig" />
         <option value="dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.story" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Form/HintType.php" />
         <option value="$PROJECT_DIR$/web/assets/jquery.js" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Entity/Hint.php" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Entity/StoryPart.php" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Entity/Story.php" />
         <option value="$PROJECT_DIR$/web/assets/css/headerStyle.css" />
         <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Form/StoryType.php" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Form/ChapterType.php" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Form/MissionType.php" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Form/CheckpointType.php" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/src/StoryBundle/Entity/Chapter.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Entity/StoryPart.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Entity/Hint.php" />
         <option value="$PROJECT_DIR$/src/StoryBundle/Entity/Mission.php" />
         <option value="$PROJECT_DIR$/src/StoryBundle/Entity/Checkpoint.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Entity/Story.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Entity/Chapter.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Form/ChapterType.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Form/CheckpointType.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Form/HintType.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Form/MissionType.php" />
+        <option value="$PROJECT_DIR$/src/StoryBundle/Form/StoryType.php" />
         <option value="$PROJECT_DIR$/web/assets/css/style.css" />
         <option value="$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/form.html.twig" />
       </list>
@@ -320,36 +357,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Quarry" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Quarry" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bundles" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="framework" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -448,6 +455,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Default" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -672,7 +683,10 @@
       <workItem from="1477846026315" duration="20393000" />
       <workItem from="1478074657262" duration="63000" />
       <workItem from="1478074731913" duration="27104000" />
-      <workItem from="1478164825118" duration="20782000" />
+      <workItem from="1478164825118" duration="21880000" />
+      <workItem from="1478201237733" duration="8984000" />
+      <workItem from="1478246223396" duration="22475000" />
+      <workItem from="1478275363457" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="User: registration, login, validation, profile show and profile edit">
       <created>1477059364655</created>
@@ -716,35 +730,42 @@
       <option name="project" value="LOCAL" />
       <updated>1477925618107</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="finished embedded forms for story/create">
+      <created>1478187311000</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1478187311000</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124884000" />
+    <option name="totallyTimeSpent" value="157452000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25567323" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18305598" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2621849" sideWeight="0.53177005" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31694403" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26928896" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24705882" sideWeight="0.46822995" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30756304" sideWeight="0.46822995" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33613446" sideWeight="0.47881997" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.4924357" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -765,7 +786,8 @@
     <MESSAGE value="Embed Chapter in Story Form" />
     <MESSAGE value="created form types for Entities in StoryBundle" />
     <MESSAGE value="embedded ChapterForm in StoryForm (bug: only saves last chapter)" />
-    <option name="LAST_COMMIT_MESSAGE" value="embedded ChapterForm in StoryForm (bug: only saves last chapter)" />
+    <MESSAGE value="finished embedded forms for story/create" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished embedded forms for story/create" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -774,13 +796,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/views/Registration/register_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="65" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/views/Registration/check_email.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -980,18 +995,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/assets/jquery.js">
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/map.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="10220" column="0" selection-start-line="10220" selection-start-column="0" selection-end-line="10220" selection-end-column="0" />
+        <state relative-caret-position="51">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Hint.php">
+    <entry file="file://$PROJECT_DIR$/web/assets/css/headerStyle.css" />
+    <entry file="file://$PROJECT_DIR$/var/cache/dev/twig/a3/a363d3cbfcdf71387c0ff417c91d343d4d06c387763062260abaf3e25a6bfaf2.php" />
+    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.user">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.story_chapter">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/assets/jquery.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
-          <folding />
+        <state relative-caret-position="173536">
+          <caret line="10220" column="0" selection-start-line="10220" selection-start-column="0" selection-end-line="10220" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -999,228 +1039,197 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/StoryPart.php">
+    <entry file="file://$PROJECT_DIR$/vendor/composer/installed.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3196">
-          <caret line="188" column="51" selection-start-line="188" selection-start-column="51" selection-end-line="188" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/map.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/assets/css/headerStyle.css" />
-    <entry file="file://$PROJECT_DIR$/var/cache/dev/twig/a3/a363d3cbfcdf71387c0ff417c91d343d4d06c387763062260abaf3e25a6bfaf2.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="35" column="142" selection-start-line="35" selection-start-column="142" selection-end-line="35" selection-end-column="142" />
+        <state relative-caret-position="37536">
+          <caret line="2208" column="5" selection-start-line="2208" selection-start-column="5" selection-end-line="2208" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/HintType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        <state relative-caret-position="238">
+          <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/MissionType.php">
+    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.hint">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.checkpoint">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.chapter">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.mission">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Hint.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+        <state relative-caret-position="194">
+          <caret line="138" column="39" selection-start-line="138" selection-start-column="39" selection-end-line="138" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/StoryPart.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="191" column="1" selection-start-line="191" selection-start-column="1" selection-end-line="191" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Checkpoint.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="174" column="36" selection-start-line="174" selection-start-column="36" selection-end-line="174" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.story">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Mission.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="176" column="42" selection-start-line="176" selection-start-column="42" selection-end-line="176" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Story.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding>
+            <element signature="e#38#86#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Chapter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+          <folding>
+            <element signature="e#38#86#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/ChapterType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/CheckpointType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.story_chapter">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Chapter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="22" column="104" selection-start-line="22" selection-start-column="104" selection-end-line="22" selection-end-column="104" />
+        <state relative-caret-position="306">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="34" />
           <folding>
-            <element signature="e#38#86#0#PHP" expanded="false" />
+            <element signature="e#36#76#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Mission.php">
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/HintType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="43" column="107" selection-start-line="43" selection-start-column="107" selection-end-line="43" selection-end-column="107" />
+        <state relative-caret-position="306">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding>
-            <element signature="e#38#86#0#PHP" expanded="false" />
+            <element signature="e#36#76#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Checkpoint.php">
+    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/MissionType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="42" column="104" selection-start-line="42" selection-start-column="104" selection-end-line="42" selection-end-column="104" />
-          <folding>
-            <element signature="e#38#86#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.checkpoint">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.hint">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.mission">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.story">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/bfe67974/8c73dc5b-4d48-4f67-af3d-bb1373937c89/quarry.chapter">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/assets/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/ChapterType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+        <state relative-caret-position="306">
+          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StoryBundle/Form/StoryType.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        <state relative-caret-position="306">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StoryBundle/Entity/Story.php">
+    <entry file="file://$PROJECT_DIR$/web/assets/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="25" column="79" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="83" />
+        <state relative-caret-position="1666">
+          <caret line="98" column="1" selection-start-line="98" selection-start-column="1" selection-end-line="98" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/form.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
+        <state relative-caret-position="17">
+          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
           <folding />
         </state>
       </provider>

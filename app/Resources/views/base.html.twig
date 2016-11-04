@@ -5,13 +5,14 @@
         <title>{% block title %}Quarry{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
         {% block stylesheets %}{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="{{ asset('assets/jquery.js') }}"></script>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
     {% trans_default_domain "UserBundle" %}
     <ul id="header-menu">
-        <li><a href={{ path('fos_user_security_login') }}>{{ 'menu.home'|trans }}</a></li>
+        <li><a href={{ path('story_default_createstory') }}>{{ 'menu.home'|trans }}</a></li>
         <li><a href={{ path('fos_user_security_login') }}>{{ 'menu.news'|trans }}</a></li>
         {% if app.user %}
             <li style="float:right"><a class="active" href={{ path('fos_user_profile_show') }}>{{ app.user.username }}</a></li>
@@ -23,7 +24,9 @@
         {% endif %}
 
     </ul>
+    <div id="body-container">
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+    </div>
     </body>
 </html>

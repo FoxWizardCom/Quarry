@@ -2,6 +2,13 @@
 
 {% block title %}Quarry!{% endblock %}
 {% block stylesheets %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block body %}
@@ -15,8 +22,37 @@
     <script>
 
         jQuery(document).ready(function(){
+            $('form').find('label:first').after('</br>').html('<h1>Story</h1>').show();
+            configureForm();
             addFormButton(0, 0, 0, 0);
+            deleteFormButton();
         });
+
+        function deleteFormButton() {
+            $collectionHolder = $('ul.tags');
+
+            // add a delete link to all of the existing tag form li elements
+            $collectionHolder.find('li').each(function () {
+                addTagFormDeleteLink($(this));
+            });
+        }
+
+        function configureForm(){
+            $( "input[type='number']" ).attr('min', '1').attr('max', '99');
+
+            //add Titles to subForms;
+            $('.chapter li').find("label:first").html('<h2 class="formTitle">Chapter</h2>').show();
+            $('.mission li').find("label:first").html('<h2 class="formTitle">Mission</h2>').show();
+            $('.checkpoint li').find("label:first").html('<h2 class="formTitle">Checkpoint</h2>').show();
+            $('.hint li').find("label:first").html('<h2 class="formTitle">Hint</h2>').show();
+
+            $('.formTitle').on('click', function(e){
+                $(this).parent().siblings().toggle();
+            });
+            $(".content").css('float','right');
+            $('input[type="submit"]').css('width', '100%');
+            //TODO Hide and prefill certain inputs
+        }
 
         function addFormButton($type, $chapterIndex, $missionIndex, $checkpointIndex) {
             var $addLink;
@@ -77,15 +113,11 @@
                 addForm($collectionHolder, $newLinkLi, $chapterLength, $missionLength, $checkpointLength, $hintLength);
                 addFormButton($type+1, $chapterLength, $missionLength, $checkpointLength);
             });
-            return;
         }
 
         function addForm($collectionHolder, $newLinkLi, $chapterLength, $missionLength, $checkpointLength, $hintLength){
             var $prototype = $collectionHolder.data('prototype');
             var $index = $collectionHolder.data('index');
-            //var $newForm = $prototype.replace(/__name__/g, $index);
-
-            var strProto = $prototype.toString();
 
             var chapterStr = "chapters_"+ $chapterLength;
             var missionStr = "missions_"+ $missionLength;
@@ -103,11 +135,42 @@
             $newForm = $newForm.replace(/hints___name__/g, hintStr);
             $newForm = $newForm.replace(/hints_0/g, hintStr);
 
+            console.log($newForm);
+
+            $newForm = $newForm.replace(/__name__/g, 0);
+            $newForm = $newForm.replace(/\[chapters\]\[0\]/g, '[chapters]['+ $chapterLength +']');
+            $newForm = $newForm.replace(/\[missions\]\[0\]/g, '[missions]['+ $missionLength +']');
+            $newForm = $newForm.replace(/\[checkpoints\]\[0\]/g, '[checkpoints]['+ $checkpointLength +']');
+            $newForm = $newForm.replace(/\[hints\]\[0\]/g, '[hints]['+ $hintLength +']');
+
+
+            /*$newForm = $newForm.replace("#\[chapters\]\[[1-9]\]#g", '[chapters]['+ $chapterLength +']');
+            $newForm = $newForm.replace("#\[missions\]\[[1-9]\]#g", '[missions]['+ $missionLength +']');
+            $newForm = $newForm.replace("#\[checkpoints\]\[[1-9]\]#g", '[checkpoints]['+ $checkpointLength +']');
+            $newForm = $newForm.replace("#\[hints\]\[[1-9]\]#g", '[hints]['+ $hintLength +']');
+*/
+            console.log($newForm);
 
             $collectionHolder.data('index', $index+1);
 
             var $newFormLi = $('<li></li>').append($newForm);
-            $newLinkLi.before($newFormLi);
+            $newLinkLi.before($newFormLi).show('slow');
+
+            addFormDeleteLink($newFormLi);
+            configureForm();
+        }
+
+        function addFormDeleteLink($tagFormLi) {
+            var $removeFormA = $('<a class="delete" href="#">delete</a>');
+            $tagFormLi.append($removeFormA);
+
+            $removeFormA.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // remove the li for the tag form
+                $tagFormLi.remove();
+            });
         }
     </script>
 {% endblock %}

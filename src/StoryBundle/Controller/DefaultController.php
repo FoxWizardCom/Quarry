@@ -29,15 +29,6 @@ class DefaultController extends Controller
     public function createStoryAction(Request $request)
     {
         $story = new Story();
-       /* $chapter = array(new Chapter());
-        $mission = array(new Mission());
-        $checkpoint = array(new Checkpoint());
-        $hint = array(new Hint());
-
-        $checkpoint[0]->setHints($hint);
-        $mission[0]->setCheckpoints($checkpoint);
-        $chapter[0]->setMissions($mission);
-        $story->setChapters($chapter);*/
 
         $form = $this->createForm(StoryType::class, $story);
 
@@ -45,6 +36,19 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
+            foreach ($story->getChapters() as $chapter){
+                $chapter->setStory($story);
+                foreach($chapter->getMissions() as $mission){
+                    $mission->setChapter($chapter);
+                    foreach($mission->getCheckpoints as $checkpoint){
+                        $checkpoint->setMission($mission);
+                        foreach($checkpoint->getHints as $hint){
+                            $hint->setCheckpoint($checkpoint);
+                        }
+                    }
+
+                }
+            }
             $em->persist($story);
             $em->flush();
 

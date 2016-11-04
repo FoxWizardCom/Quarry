@@ -136,7 +136,12 @@ class Hint extends StoryPart
 
     public function setStoryParent(StoryPart $storyPart)
     {
-        // TODO: Implement setStoryParent() method.
+        $this->checkpoint = $storyPart;
+    }
+
+    public function removeStoryChild(StoryPart $storyPart)
+    {
+        // TODO: Implement removeStoryChild() method.
     }
 }
 

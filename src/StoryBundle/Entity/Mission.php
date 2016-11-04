@@ -171,5 +171,10 @@ class Mission extends StoryPart
     {
         $this->chapter = $storyPart;
     }
+
+    public function removeStoryChild(StoryPart $storyPart)
+    {
+        $this->checkpoints->removeElement($storyPart);
+    }
 }
 

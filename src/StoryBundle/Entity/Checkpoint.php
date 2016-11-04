@@ -167,7 +167,12 @@ class Checkpoint extends StoryPart
 
     public function setStoryParent(StoryPart $storyPart)
     {
-        // TODO: Implement setStoryParent() method.
+        $this-> mission = $storyPart;
+    }
+
+    public function removeStoryChild(StoryPart $storyPart)
+    {
+        $this->hints->removeElement($storyPart);
     }
 }
 

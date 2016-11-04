@@ -1,3 +1,8 @@
+body{
+    padding: 0;
+    background-color: #efefef;
+}
+
 #header-menu {
     list-style-type: none;
     margin: 0;
@@ -26,26 +31,114 @@
     background-color: #4CAF50;
 }
 
+#body-container{
+    padding: 1%
+}
+
+form{
+    background-color: #005A31;
+    color: #F3FAB6;
+    border: 1px solid #005A31;
+    border-radius: 15px;
+    padding: 3em 0;
+    margin: 1em;
+}
+
 form .chapter{
-    background-color: blue;
+    background-color: #A8CD1B;
+    border: 1px solid #005A31;
+    border-radius: 15px;
+    padding: 3em 0;
+    margin: 1em;
 }
 
 form .mission{
-    background-color: green;
+    background-color: #CBE32D;
+    border: 1px solid #005A31;
+    border-radius: 15px;
+    padding: 3em 0;
+    margin: 1em;
 }
 
 form .checkpoint{
-    background-color: red;
+    background-color: #F3FAB6;
+    border: 1px solid #005A31;
+    border-radius: 15px;
+    padding: 3em 0;
+    margin: 1em;
 }
 
 form .hint{
-    background-color: purple;
+    background-color: sandybrown;
+    border: 1px solid #005A31;
+    border-radius: 15px;
+    padding: 3em 0;
+    margin: 1em;
 }
 
 form div{
-    padding: 0 2em;
+    padding: 0 1%;
 }
 
-a{
-    background-color: cyan;
+form label{
+    display: none;
+}
+
+form input{
+    width: 48%;
+    font-size: 1.2em;
+    color: black;
+}
+
+form textarea{
+    width: 48%;
+    font-size: 1.2em;
+    color: black;
+    padding: 12px;
+    resize: none;
+}
+
+form select{
+    width: 48%;
+    font-size: 1.2em;
+    color: black;
+}
+
+form a{
+    background-color: darkorange;
+    padding: 12px;
+    margin-top: -6px;
+    margin-left: -6px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #005A31;
+    float:right;
+}
+
+form a:hover{
+    background-color: darkorange;
+    padding: 12px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #005A31;
+}
+
+form a.delete{
+    background-color: red;
+    float: right
+}
+
+form ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+form li{
+    text-decoration: none;
+    list-style-type: none;
+}
+
+form h2{
+    color: #005A31;
 }

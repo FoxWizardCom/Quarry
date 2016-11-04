@@ -187,6 +187,7 @@ abstract class StoryPart
     }
 
     public abstract function addStoryChild(StoryPart $storyPart);
+    public abstract function removeStoryChild(StoryPart $storyPart);
     public abstract function setStoryParent(StoryPart $storyPart);
 }
 
