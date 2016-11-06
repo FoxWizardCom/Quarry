@@ -51,7 +51,14 @@
             });
             $(".content").css('float','right');
             $('input[type="submit"]').css('width', '100%');
-            //TODO Hide and prefill certain inputs
+            $('input[type="submit"]').css('padding', '12px');
+
+            var inputColor = $('input[data-type="color"]');
+            inputColor.attr('type', 'color');
+
+            inputColor.on("change", function(){
+                    $(this).parent().parent().parent().css('background-color', $(this).val());
+            });
         }
 
         function addFormButton($type, $chapterIndex, $missionIndex, $checkpointIndex) {
@@ -143,18 +150,11 @@
             $newForm = $newForm.replace(/\[checkpoints\]\[0\]/g, '[checkpoints]['+ $checkpointLength +']');
             $newForm = $newForm.replace(/\[hints\]\[0\]/g, '[hints]['+ $hintLength +']');
 
-
-            /*$newForm = $newForm.replace("#\[chapters\]\[[1-9]\]#g", '[chapters]['+ $chapterLength +']');
-            $newForm = $newForm.replace("#\[missions\]\[[1-9]\]#g", '[missions]['+ $missionLength +']');
-            $newForm = $newForm.replace("#\[checkpoints\]\[[1-9]\]#g", '[checkpoints]['+ $checkpointLength +']');
-            $newForm = $newForm.replace("#\[hints\]\[[1-9]\]#g", '[hints]['+ $hintLength +']');
-*/
-            console.log($newForm);
-
             $collectionHolder.data('index', $index+1);
 
             var $newFormLi = $('<li></li>').append($newForm);
-            $newLinkLi.before($newFormLi).show('slow');
+            $newLinkLi.before($newFormLi)
+            $newFormLi.show('slow');
 
             addFormDeleteLink($newFormLi);
             configureForm();

@@ -25,25 +25,28 @@ class HintType extends AbstractType
                     'placeholder' => 'Write a little story'
                 )))
             ->add('number', NumberType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'number')
             ))
             ->add('title', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'title')
             ))
             ->add('color', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
-            ))
+                'attr' => array(
+                    'placeholder' => 'color',
+                    'data-type' => 'color',
+                    'value' => '#efefef'
+            )))
             ->add('type', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'type')
             ))
             ->add('question', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'question')
             ))
             ->add('answer', TextType::class, array(
-            'attr' => array('placeholder' => 'content')
+            'attr' => array('placeholder' => 'answer')
             ))
             ->add('message', TextType::class, array(
-            'attr' => array('placeholder' => 'content')
+            'attr' => array('placeholder' => 'message')
         ));
     }
     

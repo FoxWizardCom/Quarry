@@ -33,9 +33,14 @@ class ChapterType extends AbstractType
                 'attr' => array('placeholder' => 'What is the Title?')
             ))
             ->add('color', TextType::class, array(
-                'attr' => array('placeholder' => 'Give it some color')
+                'attr' => array(
+                    'placeholder' => 'Give it some color',
+                    'data-type' => 'color',
+                    'value' => '#efefef'
+             )))
+            ->add('type', TextType::class, array(
+                'attr' => array('placeholder' => 'type')
             ))
-            ->add('type')
             ->add('missions', CollectionType::class, array(
                 'entry_type' => MissionType::class,
                 'allow_add' => true,

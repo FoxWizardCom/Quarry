@@ -5,6 +5,7 @@ namespace StoryBundle\Form;
 use Doctrine\DBAL\Types\StringType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,20 +26,25 @@ class StoryType extends AbstractType
             ->add('content', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'content',
-                    'rows' => '5',
+                    'rows' => '3',
                     'placeholder' => 'Write a story intro...'
                 )))
-            ->add('number')
+            ->add('number', NumberType::class, array(
+                'attr' => array(
+                    'placeholder' => 'Number')
+            ))
             ->add('title', TextType::class, array(
                 'attr' => array('placeholder' => 'Title')
             ))
             ->add('color', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
-            ))
+                'attr' => array(
+                    'placeholder' => 'color',
+                    'data-type' => 'color',
+                    'value' => '#efefef'
+            )))
             ->add('type', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'type')
             ))
-            ->add('author')
             ->add('chapters', CollectionType::class, array(
                 'entry_type' => ChapterType::class,
                 'allow_add' => true,

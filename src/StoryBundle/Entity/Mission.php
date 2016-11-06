@@ -15,9 +15,17 @@ class Mission extends StoryPart
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Chapter")
+     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Chapter", inversedBy="missions")
      */
     private $chapter;
+
+    /**
+     * @param mixed $chapter
+     */
+    public function setChapter($chapter)
+    {
+        $this->chapter = $chapter;
+    }
 
     /**
      * @var float

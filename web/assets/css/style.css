@@ -36,41 +36,48 @@ body{
 }
 
 form{
-    background-color: #005A31;
-    color: #F3FAB6;
-    border: 1px solid #005A31;
+    background-color: #efefef;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    padding: 3em 0;
+    margin: 1em;
+}
+
+.story{
+    background-color: #efefef;
+    border: 1px solid #000000;
     border-radius: 15px;
     padding: 3em 0;
     margin: 1em;
 }
 
 form .chapter{
-    background-color: #A8CD1B;
-    border: 1px solid #005A31;
+    background-color: #efefef;
+    border: 1px solid #000000;
     border-radius: 15px;
     padding: 3em 0;
     margin: 1em;
 }
 
 form .mission{
-    background-color: #CBE32D;
-    border: 1px solid #005A31;
+    background-color: #efefef;
+    border: 1px solid #000000;
     border-radius: 15px;
     padding: 3em 0;
     margin: 1em;
 }
 
 form .checkpoint{
-    background-color: #F3FAB6;
-    border: 1px solid #005A31;
+    background-color: #efefef;
+    border: 1px solid #000000;
     border-radius: 15px;
     padding: 3em 0;
     margin: 1em;
 }
 
 form .hint{
-    background-color: sandybrown;
-    border: 1px solid #005A31;
+    background-color: #efefef;
+    border: 1px solid #000000;
     border-radius: 15px;
     padding: 3em 0;
     margin: 1em;
@@ -85,13 +92,13 @@ form label{
 }
 
 form input{
-    width: 48%;
+    width: 49%;
     font-size: 1.2em;
     color: black;
 }
 
 form textarea{
-    width: 48%;
+    width: 49%;
     font-size: 1.2em;
     color: black;
     padding: 12px;
@@ -99,7 +106,7 @@ form textarea{
 }
 
 form select{
-    width: 48%;
+    width: 49%;
     font-size: 1.2em;
     color: black;
 }

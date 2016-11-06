@@ -28,25 +28,28 @@ class MissionType extends AbstractType
                     'placeholder' => 'Write a little story'
                 )))
             ->add('number', NumberType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'number')
             ))
             ->add('title', TextType::class, array(
-             'attr' => array('placeholder' => 'content')
+             'attr' => array('placeholder' => 'title')
             ))
             ->add('color', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
-            ))
+                'attr' => array(
+                    'placeholder' => 'color',
+                    'data-type' => 'color',
+                    'value' => '#efefef'
+                )))
             ->add('type', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'type')
             ))
             ->add('latitude', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'latitude')
             ))
             ->add('longitude', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'longitude')
             ))
             ->add('radius', TextType::class, array(
-                'attr' => array('placeholder' => 'content')
+                'attr' => array('placeholder' => 'radius')
             ))
             ->add('checkpoints', CollectionType::class, array(
             'entry_type' => CheckpointType::class,

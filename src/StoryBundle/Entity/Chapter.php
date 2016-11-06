@@ -3,6 +3,7 @@
 namespace StoryBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use StoryBundle\Entity\Story as Story;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +18,7 @@ class Chapter extends StoryPart
      * @ORM\ManyToOne(targetEntity="Story", inversedBy="chapters")
      *
      */
-    private $story;
+    protected $story;
 
     /**
      * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Mission", mappedBy="chapter", cascade={"persist"})
@@ -44,7 +45,7 @@ class Chapter extends StoryPart
     /**
      * @param mixed $story
      */
-    public function setStory($story)
+    public function setStory(Story $story)
     {
         $this->story = $story;
     }

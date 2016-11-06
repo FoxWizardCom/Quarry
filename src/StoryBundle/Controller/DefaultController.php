@@ -36,14 +36,18 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
+
+            $story->setAuthor($this->getUser()->getId());
+
+            //TODO fix Object Types from arraycollection;
             foreach ($story->getChapters() as $chapter){
                 $chapter->setStory($story);
                 foreach($chapter->getMissions() as $mission){
-                    $mission->setChapter($chapter);
-                    foreach($mission->getCheckpoints as $checkpoint){
-                        $checkpoint->setMission($mission);
-                        foreach($checkpoint->getHints as $hint){
-                            $hint->setCheckpoint($checkpoint);
+                    $mission->setStoryParent($chapter);
+                    foreach($mission->getCheckpoints() as $checkpoint){
+                        $checkpoint->setStoryParent($mission);
+                        foreach($checkpoint->getHints() as $hint){
+                            $hint->setStoryParent($checkpoint);
                         }
                     }
 
@@ -58,10 +62,44 @@ class DefaultController extends Controller
 }
 
     /**
-     * @Route("/story/map")
+     * @Route("/story/list")
      */
-    public function mapAction()
+    public function storyListAction()
     {
-        return $this->render('StoryBundle:Default:map.html.twig');
+        $stories = $this->getDoctrine()
+            ->getRepository('StoryBundle:Story')
+            ->findAll();
+
+        if (!$stories) {
+            throw $this->createNotFoundException(
+               'no stories found!'
+            );
+        }
+        return $this->render('StoryBundle:Default:storylist.html.twig', array('stories' => $stories));
+    }
+
+    /**
+     * @Route("/story/{storyId}", name="story")
+     */
+    public function storyAction($storyId)
+    {
+        $story = $this->getDoctrine()
+            ->getRepository('StoryBundle:Story')
+            ->find($storyId);
+
+        return $this->render('StoryBundle:Default:story.html.twig', array('story' => $story));
+    }
+
+
+    /**
+     * @Route("/story/{storyId}/map", name="storymap")
+     */
+    public function mapAction($storyId)
+    {
+        $story = $this->getDoctrine()
+            ->getRepository('StoryBundle:Story')
+            ->find($storyId);
+
+        return $this->render('StoryBundle:Default:map.html.twig', array('story' => $story));
     }
 }
