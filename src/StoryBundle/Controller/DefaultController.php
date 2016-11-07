@@ -10,8 +10,11 @@ use StoryBundle\Entity\Story;
 use StoryBundle\Form\ChapterType;
 use StoryBundle\Form\StoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -101,5 +104,20 @@ class DefaultController extends Controller
             ->find($storyId);
 
         return $this->render('StoryBundle:Default:map.html.twig', array('story' => $story));
+    }
+
+    /**
+     * @Route("/ajax", name="ajax", options={"expose"=true})
+     * @param Request $request
+     * @return JsonResponse|Response
+     *
+     */
+    public function ajaxAction(Request $request)
+    {
+        if ($request->isXMLHttpRequest()) {
+            return new JsonResponse(array('data' => 'this is a json response'));
+        }
+
+        return new Response('This is not ajax!', 400);
     }
 }

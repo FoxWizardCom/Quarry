@@ -2,7 +2,6 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{% block title %}Quarry{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
         {% block stylesheets %}{% endblock %}
@@ -24,9 +23,7 @@
         {% endif %}
 
     </ul>
-    <div id="body-container">
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
-    </div>
     </body>
 </html>

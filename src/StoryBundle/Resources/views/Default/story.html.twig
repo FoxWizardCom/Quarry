@@ -12,9 +12,10 @@
 {% endblock %}
 
 {% block body %}
-
-<a href="{{ path('storymap', {'storyId': story.id}) }}"><div class="story" style="background-color: {{ story.color }}"><p>{{story.title}}</p></div><a/>
-    {% endblock %}
+    {% if story is defined %}
+        <a href="{{ path('storymap', {'storyId': story.id}) }}"><div class="story" style="background-color: {{ story.color }}"><p>{{story.title}}</p></div><a/>
+    {% endif %}
+{% endblock %}
 
     {% block javascripts %}
 {% endblock %}
