@@ -17,14 +17,13 @@ class Story extends StoryPart
 {
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="stories")
      */
     private $author;
 
     /**
-     * @ORM\OneToMany(targetEntity="Chapter", mappedBy="Story", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Chapter", mappedBy="story", cascade={"persist"})
      */
     protected $chapters;
 

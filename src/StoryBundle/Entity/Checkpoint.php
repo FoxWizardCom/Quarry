@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Checkpoint extends StoryPart
 {
     /**
-     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Mission")
+     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Mission", inversedBy="checkpoints")
      */
     private $mission;
 

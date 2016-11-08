@@ -49,7 +49,7 @@ class Mission extends StoryPart
     private $radius;
 
     /**
-     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Checkpoint", mappedBy="Mission", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Checkpoint", mappedBy="mission", cascade={"persist"})
      */
     protected $checkpoints;
 

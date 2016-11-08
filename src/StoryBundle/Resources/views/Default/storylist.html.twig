@@ -13,7 +13,18 @@
 
 {% block body %}
     {% for story in stories %}
-        <a href="{{ path('story', {'storyId': story.id}) }}"><div class="story" style="background-color: {{ story.color }}"><p>{{story.title}}</p></div><a/>
+        <div><a href="{{ path('story', {'storyId': story.id}) }}"><div class="story" style="background-color: {{ story.color }}"><p>{{story.title}}</p></div><a/>
+            {% for chapter in story.chapters %}
+                <div>
+                    {{ chapter.title }}
+                    {% for mission in chapter.missions %}
+                    <div>
+                        {{ mission.title }}
+                    </div>
+                    {% endfor %}
+                </div>
+                </div>
+            {% endfor %}
     {% endfor %}
 {% endblock %}
 

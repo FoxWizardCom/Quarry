@@ -16,7 +16,7 @@ class Chapter extends StoryPart
 {
     /**
      * @ORM\ManyToOne(targetEntity="Story", inversedBy="chapters")
-     *
+     * @ORM\JoinColumn(name="story_id", referencedColumnName="id")
      */
     protected $story;
 

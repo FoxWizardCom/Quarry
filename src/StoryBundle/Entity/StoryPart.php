@@ -44,6 +44,29 @@ abstract class StoryPart
     /**
      * @var string
      *
+     * @ORM\Column(name="textColor", type="string", length=255)
+     */
+    private $textColor;
+
+    /**
+     * @return string
+     */
+    public function getTextColor()
+    {
+        return $this->textColor;
+    }
+
+    /**
+     * @param string $textColor
+     */
+    public function setTextColor($textColor)
+    {
+        $this->textColor = $textColor;
+    }
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="type", type="string", length=255)
      */
     private $type;

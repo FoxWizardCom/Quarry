@@ -1,0 +1,71 @@
+#map {
+    height: 93vh;
+}
+
+#showDetail{
+    position:absolute;
+    top: 11%;
+    right: 1%;
+    z-index: 9999;
+}
+
+#hideDetail{
+    position:absolute;
+    top: 2%;
+    right: 1%;
+    z-index: 9999;
+}
+
+#detail{
+    z-index: 10000;
+    position: absolute;
+    background: #EFEFEF;
+    margin: 0;
+    padding: 0;
+}
+
+.story{
+    padding: 12px;
+    height: 100%;
+}
+
+.story>.title{
+    font-size: 2em;
+    margin: auto;
+}
+
+.chapter{
+
+}
+
+.mission{
+
+}
+
+.checkpoint{
+
+}
+
+.hint{
+
+}
+
+.title{
+    font-size: 1.5em;
+}
+
+.overlay-closed {
+    display: none;
+    bottom: 0;
+    height : 0;
+    width : 100%;
+    opacity:0;
+}
+
+.overlay-open{
+    display: block;
+    bottom: 0;
+    width:100%;
+    height:91%;
+    opacity:0.9;
+}

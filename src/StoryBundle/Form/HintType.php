@@ -36,6 +36,12 @@ class HintType extends AbstractType
                     'data-type' => 'color',
                     'value' => '#efefef'
             )))
+            ->add('textColor', TextType::class, array(
+                'attr' => array(
+                    'placeholder' => 'text color',
+                    'data-type' => 'textcolor',
+                    'value' => '#000000'
+                )))
             ->add('type', TextType::class, array(
                 'attr' => array('placeholder' => 'type')
             ))

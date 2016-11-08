@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/story")
+     * @Route("/")
      */
     public function indexAction()
     {
@@ -40,9 +40,8 @@ class DefaultController extends Controller
 
             $em = $this->getDoctrine()->getManager();
 
-            $story->setAuthor($this->getUser()->getId());
+            $story->setAuthor($this->getUser());
 
-            //TODO fix Object Types from arraycollection;
             foreach ($story->getChapters() as $chapter){
                 $chapter->setStory($story);
                 foreach($chapter->getMissions() as $mission){
@@ -59,7 +58,7 @@ class DefaultController extends Controller
             $em->persist($story);
             $em->flush();
 
-            return $this->render('StoryBundle:Default:form.html.twig', array('form' => $form->createView() ) );
+            return $this->redirectToRoute('story', array('storyId' => $story->getId()));
         }
        return $this->render('StoryBundle:Default:form.html.twig', array('form' => $form->createView()) );
 }
@@ -91,19 +90,6 @@ class DefaultController extends Controller
             ->find($storyId);
 
         return $this->render('StoryBundle:Default:story.html.twig', array('story' => $story));
-    }
-
-
-    /**
-     * @Route("/story/{storyId}/map", name="storymap")
-     */
-    public function mapAction($storyId)
-    {
-        $story = $this->getDoctrine()
-            ->getRepository('StoryBundle:Story')
-            ->find($storyId);
-
-        return $this->render('StoryBundle:Default:map.html.twig', array('story' => $story));
     }
 
     /**

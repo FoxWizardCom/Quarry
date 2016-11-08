@@ -11,8 +11,9 @@
     <body>
     {% trans_default_domain "UserBundle" %}
     <ul id="header-menu">
-        <li><a href={{ path('story_default_createstory') }}>{{ 'menu.home'|trans }}</a></li>
-        <li><a href={{ path('story_default_storylist') }}>{{ 'menu.news'|trans }}</a></li>
+        <li><a href={{ path('story_default_index') }}>{{ 'menu.home'|trans }}</a></li>
+        <li><a href={{ path('story_default_storylist') }}>{{ 'menu.list'|trans }}</a></li>
+        <li><a href={{ path('story_default_createstory') }}>{{ 'menu.new'|trans }}</a></li>
         {% if app.user %}
             <li style="float:right"><a class="active" href={{ path('fos_user_profile_show') }}>{{ app.user.username }}</a></li>
         {% else %}
@@ -23,7 +24,9 @@
         {% endif %}
 
     </ul>
+    <div id="body-container">
         {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

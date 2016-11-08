@@ -8,4 +8,5 @@ menu:
     login: 'se connecter'
     register: "s'inscrire"
     home: 'Quarry'
-    news: 'nouveautés'
+    list: 'Story list'
+    new: 'create Story'

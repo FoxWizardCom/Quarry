@@ -4,6 +4,11 @@
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
     <p>{{ 'profile.show.about'|trans }}: {{ user.about }}</p>
+    <ul>
+    {% for story in user.stories %}
+    <li>{{ story.title }}</li>
+    {% endfor %}
+    </ul>
 </div>
 
 <a href={{ path('fos_user_profile_edit')}}>{{ 'profile.edit.submit'|trans }}</a>

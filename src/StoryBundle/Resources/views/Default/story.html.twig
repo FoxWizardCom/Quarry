@@ -2,20 +2,114 @@
 
 {% block title %}Quarry!{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/story.css') }}" />
+    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 {% endblock %}
 
 {% block body %}
-    {% if story is defined %}
-        <a href="{{ path('storymap', {'storyId': story.id}) }}"><div class="story" style="background-color: {{ story.color }}"><p>{{story.title}}</p></div><a/>
-    {% endif %}
-{% endblock %}
+    <div id="showDetail">show Detail</div>
+    <div id='map'></div>
+    <div id="detail" class="overlay-open">
+        <div id="story{{ story.id }}" class="story" style="background-color:{{ story.color }}; color:{{ story.textColor }};">
+            <p class="title">{{ story.title }}</p>
+            <div class="content">{{ story.content }}</div>
+            <ul>
+                {% for chapter in story.chapters %}
+                    <li>
+                        <div id="chapter{{ chapter.id }}" class="chapter" style="background-color:{{ chapter.color }}; color:{{ chapter.textColor }};">
+                            <p class="title">Chapter {{ chapter.number }}: {{ chapter.title }}</p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="hideDetail">close Detail</div>
+    </div>
+    <script>
 
-    {% block javascripts %}
+        function setupStoryFromProgression(){
+
+        }
+
+        function setupMap() {
+            var map = L.map('map').fitWorld();
+
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.pencil',
+                accessToken: 'pk.eyJ1IjoiZm94d2l6YXJkIiwiYSI6ImNpdjd5a3I3ZTAwMG0yb255NHN5b2NyajgifQ.PmTe7X9ZZGrmIXaN5vJoeg'
+            }).addTo(map);
+
+            function Mission(title, content, location, radius, color, type) {
+                this.title = title;
+                this.content = content;
+                this.location = location;
+                this.radius = radius;
+                this.color = color;
+                this.type = type;
+            }
+
+            var mission = new Mission("Mission 1", "C'est ici que commencera votre premiere mission", [50.848375, 4.350823], 500, 'red', 0);
+
+            if (mission.type == 0) {
+                var circle = L.circle(mission.location, mission.radius, {
+                    color: mission.color,
+                    fillColor: '#f03',
+                    fillOpacity: 0.5
+                }).addTo(map).bindPopup(mission.content);
+            }
+
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
+            map.locate({setView: true, maxZoom: 16});
+        }
+
+        function onLocationFound(e) {
+            var radius = e.accuracy / 20;
+
+            L.marker(e.latlng).addTo(map)
+                    .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+            L.circle(e.latlng, radius).addTo(map);
+        }
+
+        function onLocationError(e) {
+            alert(e.message);
+        }
+
+        jQuery(document).ready(function(){
+
+            setupMap();
+            setupStoryFromProgression();
+
+            var detail = $('#detail');
+
+            $('#showDetail').on('click', function(){
+                detail.addClass('overlay-open');
+                detail.addClass('overlay-closed');
+            });
+
+            $('#hideDetail').on('click', function(){
+                detail.removeClass('overlay-open');
+                detail.addClass('overlay-closed');
+            });
+
+            $('#ajax').on('click', function(){
+                $.ajax({
+                    type: "POST",
+                    url: Routing.generate('ajax'),
+                    dataType: "json",
+                    data: "",
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

@@ -25,8 +25,28 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Story", mappedBy="author", cascade={"persist"})
+     */
+    protected $stories;
+
+    /**
+     * @return mixed
+     */
+    public function getStories()
+    {
+        return $this->stories;
+    }
+
+    /**
+     * @param mixed $stories
+     */
+    public function setStories($stories)
+    {
+        $this->stories = $stories;
+    }
+
+    /**
      * @ORM\Column(type="string", length=255)
-     *
      *
      */
     protected $about;
@@ -35,7 +55,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->about = "";
     }
 
     /**
