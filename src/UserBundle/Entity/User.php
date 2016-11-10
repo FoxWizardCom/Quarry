@@ -84,6 +84,5 @@ class User extends BaseUser
         $this->about = $about;
     }
 
-
 }
 

@@ -2,11 +2,14 @@
 
 namespace StoryBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use StoryBundle\Entity\Chapter;
 use StoryBundle\Entity\Checkpoint;
 use StoryBundle\Entity\Hint;
 use StoryBundle\Entity\Mission;
+use StoryBundle\Entity\Progression;
 use StoryBundle\Entity\Story;
+use StoryBundle\Entity\UserStory;
 use StoryBundle\Form\ChapterType;
 use StoryBundle\Form\StoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -85,18 +88,44 @@ class DefaultController extends Controller
      */
     public function storyAction($storyId)
     {
-        $story = $this->getDoctrine()
-            ->getRepository('StoryBundle:Story')
+        $em = $this->getDoctrine();
+
+        $story = $em->getRepository('StoryBundle:Story')
             ->find($storyId);
 
-        return $this->render('StoryBundle:Default:story.html.twig', array('story' => $story));
+        $userStory = $em->getRepository('StoryBundle:UserStory')
+            ->findOneBy(array('user' => $this->getUser(), 'story' => $story));
+
+
+        $progressions = new ArrayCollection();
+        if($userStory != null) {
+            $progressions = $userStory->getProgressions();
+        }else{
+            $userStory = new UserStory();
+            $userStory->setUser($this->getUser());
+            $userStory->setStory($story);
+
+            foreach ($story->getChapters() as $chapter){
+                foreach($chapter->getMissions() as $mission){
+                    foreach ($mission->getCheckpoints() as $checkpoint){
+                        $progressions->add(new Progression($chapter, $mission,$checkpoint));
+                    }
+                }
+            }
+            $userStory->setProgressions($progressions);
+
+           $manager = $this->getDoctrine()->getManager();
+               $manager->persist($userStory);
+               $manager->flush();
+        }
+
+        return $this->render('StoryBundle:Default:story.html.twig', array('story' => $story, 'progressions' => $progressions));
     }
 
     /**
      * @Route("/ajax", name="ajax", options={"expose"=true})
      * @param Request $request
      * @return JsonResponse|Response
-     *
      */
     public function ajaxAction(Request $request)
     {

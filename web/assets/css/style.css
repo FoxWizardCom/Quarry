@@ -8,7 +8,6 @@ body{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    height: 9%;
     font-size: 1.2em;
     overflow: hidden;
     font-weight: bold;
@@ -43,7 +42,12 @@ body{
 }
 
 #body-container{
-    height: 90%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 form{

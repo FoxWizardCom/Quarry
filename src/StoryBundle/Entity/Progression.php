@@ -21,6 +21,21 @@ class Progression
      */
     private $id;
 
+    /**
+     * Progression constructor.
+     * @param $chapter
+     * @param $mission
+     * @param $checkpoint
+     */
+    public function __construct($chapter, $mission, $checkpoint)
+    {
+        $this->chapter = $chapter;
+        $this->mission = $mission;
+        $this->checkpoint = $checkpoint;
+        $this->timeStarted = 0;
+        $this->timeFinished = 0;
+    }
+
 
     /**
      * Get id
@@ -33,30 +48,91 @@ class Progression
     }
 
     /**
-    * @ORM\OneToOne(targetEntity="StoryBundle\Entity\Chapter", mappedBy="id", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\UserStory", inversedBy="progressions")
+     */
+    private $userStory;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Chapter", cascade={"persist"})
     * @ORM\JoinColumn(name="chapter_id", referencedColumnName="id")
     */
     protected $chapter;
 
     /**
-     * @ORM\OneToOne(targetEntity="StoryBundle\Entity\Mission", mappedBy="id", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Mission", cascade={"persist"})
      * @ORM\JoinColumn(name="mission_id", referencedColumnName="id")
      */
     protected $mission;
 
     /**
-     * @ORM\OneToOne(targetEntity="StoryBundle\Entity\Checkpoint", mappedBy="id", cascade={"persist"})
+     * @return mixed
+     */
+    public function getUserStory()
+    {
+        return $this->userStory;
+    }
+
+    /**
+     * @param mixed $userStory
+     */
+    public function setUserStory($userStory)
+    {
+        $this->userStory = $userStory;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Checkpoint", cascade={"persist"})
      * @ORM\JoinColumn(name="checkpoint_id", referencedColumnName="id")
      */
     protected $checkpoint;
 
     /**
-     * @ORM\OneToOne(targetEntity="StoryBundle\Entity\Hint", mappedBy="hint", cascade={"persist"})
-     * @ORM\JoinColumn(name="hint_id", referencedColumnName="id")
+     * @var int
+     *
+     * @ORM\Column(name="time_started", type="integer")
      */
-    protected $hint;
+    protected $timeStarted;
 
-    protected $time;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="time_finished", type="integer")
+     */
+    protected $timeFinished;
+
+    /**
+     * @return int
+     */
+    public function getTimeStarted()
+    {
+        return $this->timeStarted;
+    }
+
+    /**
+     * @param int $timeStarted
+     */
+    public function setTimeStarted($timeStarted)
+    {
+        $this->timeStarted = $timeStarted;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimeFinished()
+    {
+        return $this->timeFinished;
+    }
+
+    /**
+     * @param int $timeFinished
+     */
+    public function setTimeFinished($timeFinished)
+    {
+        $this->timeFinished = $timeFinished;
+    }
+
+
 
     /**
      * @return mixed
@@ -106,36 +182,7 @@ class Progression
         $this->checkpoint = $checkpoint;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getHint()
-    {
-        return $this->hint;
-    }
 
-    /**
-     * @param mixed $hint
-     */
-    public function setHint($hint)
-    {
-        $this->hint = $hint;
-    }
 
-    /**
-     * @return mixed
-     */
-    public function getTime()
-    {
-        return $this->time;
-    }
-
-    /**
-     * @param mixed $time
-     */
-    public function setTime($time)
-    {
-        $this->time = $time;
-    }
 }
 

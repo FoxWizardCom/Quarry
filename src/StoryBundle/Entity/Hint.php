@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Hint extends StoryPart
 {
     /**
-     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Checkpoint")
+     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Checkpoint", inversedBy="hints")
      */
     private $checkpoint;
 

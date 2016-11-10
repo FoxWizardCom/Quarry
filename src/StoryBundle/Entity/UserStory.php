@@ -2,6 +2,7 @@
 
 namespace StoryBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,22 +34,74 @@ class UserStory
     }
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User", mappedBy="id", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="StoryBundle\Entity\Story", mappedBy="id", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Story", cascade={"persist"})
      * @ORM\JoinColumn(name="story_id", referencedColumnName="id")
      */
     protected $story;
 
     /**
-     * @ORM\OneToOne(targetEntity="StoryBundle\Entity\Progression", mappedBy="id", cascade={"persist"})
-     * @ORM\JoinColumn(name="progression_id", referencedColumnName="id")
+     * @return mixed
      */
-    protected $progression;
+    public function getProgressions()
+    {
+        return $this->progressions;
+    }
+
+    /**
+     * @param mixed $progressions
+     */
+    public function setProgressions($progressions)
+    {
+        $this->progressions = $progressions;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="StoryBundle\Entity\Progression", mappedBy="userStory", cascade={"persist"})
+     */
+    protected $progressions;
+
+    public function __construct()
+    {
+        $this->progressions = new ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStory()
+    {
+        return $this->story;
+    }
+
+    /**
+     * @param mixed $story
+     */
+    public function setStory($story)
+    {
+        $this->story = $story;
+    }
 
 }
 
