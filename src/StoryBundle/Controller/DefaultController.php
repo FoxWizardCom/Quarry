@@ -142,11 +142,15 @@ class DefaultController extends Controller
     {
         $array = json_decode($request->getContent());
 
-        $progression = new Progression($array->{"id"},$array->{"chapterId"},$array->{"missionId"},$array->{"checkpointId"},$array->{"timeStarted"},$array->{"timeFinished"});
+        $em = $this->getDoctrine()->getEntityManager();
 
-       /* $em = $this->getDoctrine()->getManager();
-        $em->persist($progression);
-        $em->flush();*/
+        $progression = $em->getRepository('StoryBundle:Progression')->findOneBy(array('id' => $array->{'id'}));
+
+        $progression->setTimeStarted($array->{'timeStarted'});
+        $progression->setTimeFinished($array->{'timeFinished'});
+
+        $em->flush();
+
 
         if ($request->isXMLHttpRequest()) {
             return new JsonResponse(array('data' => 'this is a json response'));

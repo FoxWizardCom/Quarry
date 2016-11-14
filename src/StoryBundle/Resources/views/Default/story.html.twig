@@ -58,10 +58,9 @@
       var progressions = [];
 
         function convertProgression(){
-
             {% for progression in progressions %}
                 progressions.push({
-                        userStoryId: {{ progression.userStory }},
+                        userStoryId: {{ progression.userStory.id }},
                         id: {{  progression.id }},
                         chapterId: {{ progression.chapter }},
                         missionId: {% if progression.mission %}{{ progression.mission }} {% else %} 0 {% endif %},
@@ -77,6 +76,7 @@
                 saveProgression(progressions[0]);
             }
             else{
+                saveProgression(progressions[0]);
                 setupStoryFromProgression();
             }
         }
@@ -150,11 +150,7 @@
                 dataType: "json",
 //                data: "{progression: " + progression + "}",
                 data: '{' +
-                    '"userStoryId":' + progression.userStoryId +
-                    ', "id":' + progression.id +
-                    ', "chapterId":' + progression.chapterId +
-                    ', "missionId":' + progression.missionId +
-                    ', "checkpointId":' + progression.checkpointId +
+                    '"id":' + progression.id +
                     ', "timeStarted":' + progression.timeStarted +
                     ', "timeFinished":' + progression.timeFinished + "}",
                 success: function(response) {
