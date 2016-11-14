@@ -22,16 +22,22 @@
                     <li>
                         <div id="chapter{{ chapter.id }}" class="chapter hidden" style="background-color:{{ chapter.color }}; color:{{ chapter.textColor }};">
                             <p class="title">Chapter {{ chapter.number }}: {{ chapter.title }}</p>
+                            <p>{{ chapter.content }}</p>
+                            <button class="startChapter" data-chapter="{{ chapter.id }}">Start Chapter</button>
                             <ul>
                                 {% for mission in chapter.missions %}
                                     <li>
                                     <div id="mission{{ mission.id }}" data-chapter="{{ chapter.id }}" class="mission hidden" style="background-color:{{ mission.color }}; color:{{ mission.textColor }};">
                                         <p class="title">Mission {{ mission.number }}: {{ mission.title }}</p>
+                                        <p>{{ mission.content }}</p>
+                                        <button class="startMission" data-chapter="{{ chapter.id }}" data-mission="{{ mission.id }}">Start Mission</button>
                                         <ul>
                                             {% for checkpoint in mission.checkpoints %}
                                                 <li>
                                                     <div id="checkpoint{{ checkpoint.id }}" data-chapter="{{ chapter.id }}" data-mission="{{ mission.id }}" class="checkpoint hidden" style="background-color:{{ checkpoint.color }}; color:{{ checkpoint.textColor }};">
                                                         <p class="title">Checkpoint {{ checkpoint.number }}: {{ checkpoint.title }}</p>
+                                                        <p>{{ checkpoint.content }}</p>
+                                                        <button class="startCheckpoint" data-chapter="{{ chapter.id }}" data-mission="{{ mission.id }}" data-checkpoint="{{ checkpoint.id }}">Start Checkpoint</button>
                                                     </div>
                                                 </li>
                                             {% endfor %}
@@ -45,15 +51,50 @@
                 {% endfor %}
             </ul>
         </div>
+        <button class="startStory"></button>
     </div>
     <script>
-        function setupStoryFromProgression(){
+
+      var progressions = [];
+
+        function convertProgression(){
+
             {% for progression in progressions %}
-                {% if progression.time_started and not progression.time_finished %}
-                    $('#chapter'+{{ progression.chapter_id }}).append("Chapter");
-                {% endif %}
+                progressions.push({
+                        userStoryId: {{ progression.userStory }},
+                        id: {{  progression.id }},
+                        chapterId: {{ progression.chapter }},
+                        missionId: {% if progression.mission %}{{ progression.mission }} {% else %} 0 {% endif %},
+                        checkpointId: {% if progression.checkpoint %}{{ progression.checkpoint }} {% else %} 0 {% endif %},
+                        timeStarted: {{ progression.timeStarted }},
+                        timeFinished: {{ progression.timeFinished }} });
             {% endfor %}
         }
+
+        function startStory(){
+            if(progressions[0].timeStarted == 0){
+                progressions[0].timeStarted = new Date().getTime();
+                saveProgression(progressions[0]);
+            }
+            else{
+                setupStoryFromProgression();
+            }
+        }
+
+      function setupStoryFromProgression(){
+          for(var i = 0; i < progressions.length; i++){
+              var progression = progressions[i];
+
+              if(progression.timeStarted != 0 && progression.timeFinished == 0){
+                  alert('should add chapter' + progression.chapterId);
+                  $('#chapter'+ progression.chapterId ).removeClass('hidden');
+              }
+          }
+
+          $('.startChapter').on('click', function(){
+
+          });
+      }
 
         function setupMap() {
             var map = L.map('map').fitWorld();
@@ -102,10 +143,31 @@
             alert(e.message);
         }
 
+        function saveProgression(progression){
+            $.ajax({
+                type: "POST",
+                url: Routing.generate('ajax'),
+                dataType: "json",
+//                data: "{progression: " + progression + "}",
+                data: '{' +
+                    '"userStoryId":' + progression.userStoryId +
+                    ', "id":' + progression.id +
+                    ', "chapterId":' + progression.chapterId +
+                    ', "missionId":' + progression.missionId +
+                    ', "checkpointId":' + progression.checkpointId +
+                    ', "timeStarted":' + progression.timeStarted +
+                    ', "timeFinished":' + progression.timeFinished + "}",
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
         jQuery(document).ready(function(){
 
+            convertProgression();
             setupMap();
-            setupStoryFromProgression();
+            startStory();
 
             var detail = $('#detail');
 

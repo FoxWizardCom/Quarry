@@ -3,6 +3,7 @@
 namespace StoryBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use DoctrineTest\InstantiatorTestAsset\WakeUpNoticesAsset;
 use StoryBundle\Entity\Chapter;
 use StoryBundle\Entity\Checkpoint;
 use StoryBundle\Entity\Hint;
@@ -106,9 +107,19 @@ class DefaultController extends Controller
             $userStory->setStory($story);
 
             foreach ($story->getChapters() as $chapter){
+                $progression = new Progression($userStory, $chapter, null, null, 0, 0);
+                $progression->setUserStory($userStory);
+                $progressions->add($progression);
                 foreach($chapter->getMissions() as $mission){
-                    foreach ($mission->getCheckpoints() as $checkpoint){
-                        $progressions->add(new Progression($chapter, $mission,$checkpoint));
+                    $progression = new Progression($userStory, $chapter, $mission, null,0 , 0);
+                    $progression->setUserStory($userStory);
+                    $progressions->add($progression);
+                    if($mission != null) {
+                        foreach ($mission->getCheckpoints() as $checkpoint) {
+                            $progression = new Progression($userStory, $chapter, $mission, $checkpoint, 0, 0);
+                            $progression->setUserStory($userStory);
+                            $progressions->add($progression);
+                        }
                     }
                 }
             }
@@ -129,6 +140,14 @@ class DefaultController extends Controller
      */
     public function ajaxAction(Request $request)
     {
+        $array = json_decode($request->getContent());
+
+        $progression = new Progression($array->{"id"},$array->{"chapterId"},$array->{"missionId"},$array->{"checkpointId"},$array->{"timeStarted"},$array->{"timeFinished"});
+
+       /* $em = $this->getDoctrine()->getManager();
+        $em->persist($progression);
+        $em->flush();*/
+
         if ($request->isXMLHttpRequest()) {
             return new JsonResponse(array('data' => 'this is a json response'));
         }

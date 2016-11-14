@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Progression
 {
+
     /**
      * @var int
      *
@@ -27,13 +28,14 @@ class Progression
      * @param $mission
      * @param $checkpoint
      */
-    public function __construct($chapter, $mission, $checkpoint)
+    public function __construct($userStory, $chapter, $mission, $checkpoint, $timeStarted, $timeFinished)
     {
+        $this->userStory = $userStory;
         $this->chapter = $chapter;
         $this->mission = $mission;
         $this->checkpoint = $checkpoint;
-        $this->timeStarted = 0;
-        $this->timeFinished = 0;
+        $this->timeStarted = $timeStarted;
+        $this->timeFinished = $timeFinished;
     }
 
 
@@ -60,7 +62,7 @@ class Progression
 
     /**
      * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Mission", cascade={"persist"})
-     * @ORM\JoinColumn(name="mission_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="mission_id", referencedColumnName="id", nullable=true)
      */
     protected $mission;
 
@@ -82,7 +84,7 @@ class Progression
 
     /**
      * @ORM\ManyToOne(targetEntity="StoryBundle\Entity\Checkpoint", cascade={"persist"})
-     * @ORM\JoinColumn(name="checkpoint_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="checkpoint_id", referencedColumnName="id", nullable=true)
      */
     protected $checkpoint;
 
