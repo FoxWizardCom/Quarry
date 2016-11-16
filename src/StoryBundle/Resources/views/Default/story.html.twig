@@ -13,91 +13,239 @@
 {% block body %}
     <div id="showDetail">-</div>
     <div id='map'></div>
+    <div id="message"></div>
     <div id="detail" class="overlay-open">
         <div id="story" class="story" style="background-color:{{ story.color }}; color:{{ story.textColor }};">
-            <p class="title">{{ story.title }}</p>
+            <p class="title">Story: {{ story.title }}</p>
             <div class="content">{{ story.content }}</div>
-            <ul id="chapters{{ story.id }}">
                 {% for chapter in story.chapters %}
-                    <li>
                         <div id="chapter{{ chapter.id }}" class="chapter hidden" style="background-color:{{ chapter.color }}; color:{{ chapter.textColor }};">
-                            <p class="title">Chapter {{ chapter.number }}: {{ chapter.title }}</p>
-                            <p>{{ chapter.content }}</p>
-                            <button class="startChapter" data-chapter="{{ chapter.id }}">Start Chapter</button>
-                            <ul>
+                            <p class="title">Chapter {{ chapter.number }}: {{ chapter.title }} <button class="startChapter" data-chapter="{{ chapter.id }}">Start Chapter</button></p>
+                            <p class="content hidden">{{ chapter.content|raw }}</p>
                                 {% for mission in chapter.missions %}
-                                    <li>
                                     <div id="mission{{ mission.id }}" data-chapter="{{ chapter.id }}" class="mission hidden" style="background-color:{{ mission.color }}; color:{{ mission.textColor }};">
-                                        <p class="title">Mission {{ mission.number }}: {{ mission.title }}</p>
-                                        <p>{{ mission.content }}</p>
-                                        <button class="startMission" data-chapter="{{ chapter.id }}" data-mission="{{ mission.id }}">Start Mission</button>
-                                        <ul>
+                                        <p class="title">Mission {{ mission.number }}: {{ mission.title }} <button class="startMission" data-mission="{{ mission.id }}">Start Mission</button></p>
+                                        <p class="content hidden">{{ mission.content }}</p>
                                             {% for checkpoint in mission.checkpoints %}
-                                                <li>
                                                     <div id="checkpoint{{ checkpoint.id }}" data-chapter="{{ chapter.id }}" data-mission="{{ mission.id }}" class="checkpoint hidden" style="background-color:{{ checkpoint.color }}; color:{{ checkpoint.textColor }};">
-                                                        <p class="title">Checkpoint {{ checkpoint.number }}: {{ checkpoint.title }}</p>
-                                                        <p>{{ checkpoint.content }}</p>
-                                                        <button class="startCheckpoint" data-chapter="{{ chapter.id }}" data-mission="{{ mission.id }}" data-checkpoint="{{ checkpoint.id }}">Start Checkpoint</button>
-                                                    </div>
-                                                </li>
+                                                        <p class="title">Checkpoint {{ checkpoint.number }}: {{ checkpoint.title }} <button class="startCheckpoint" data-checkpoint="{{ checkpoint.id }}">Start Checkpoint</button></p>
+                                                        <p class="content hidden">{{ checkpoint.content }}
+                                                            <button class="foundCheckpoint" data-checkpoint="{{ checkpoint.id }}">Found Checkpoint</button>
+                                                        </p>
+                                                        </div>
                                             {% endfor %}
-                                        </ul>
                                     </div>
-                                        </li>
                                 {% endfor %}
-                        </ul>
                         </div>
-                    </li>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
-        <button class="startStory"></button>
-    </div>
     <script>
 
       var progressions = [];
+      var mapMarkers = [];
 
-        function convertProgression(){
+      var map;
+      var userLocation;
+
+        function convertVariables(){
             {% for progression in progressions %}
                 progressions.push({
-                        userStoryId: {{ progression.userStory.id }},
+                       // userStoryId: {{ progression.userStory.id }},
                         id: {{  progression.id }},
-                        chapterId: {{ progression.chapter }},
-                        missionId: {% if progression.mission %}{{ progression.mission }} {% else %} 0 {% endif %},
-                        checkpointId: {% if progression.checkpoint %}{{ progression.checkpoint }} {% else %} 0 {% endif %},
+                        chapterId: {{ progression.chapter.id }},
+                        missionId: {% if progression.mission %}{{ progression.mission.id }} {% else %} 0 {% endif %},
+                        checkpointId: {% if progression.checkpoint %}{{ progression.checkpoint.id }} {% else %} 0 {% endif %},
                         timeStarted: {{ progression.timeStarted }},
-                        timeFinished: {{ progression.timeFinished }} });
+                        timeFinished: {{ progression.timeFinished }}
+                });
+            {% endfor %}
+
+            {% for chapter in story.chapters %}
+                {% for mission in chapter.missions %}
+                    mapMarkers["mission" + {{ mission.id }}] = {
+                        id: {{ mission.id }},
+                        title: "{{ mission.title }}",
+                        content: "{{ mission.content }}",
+                        location: [{{ mission.latitude }},{{ mission.longitude }}],
+                        radius: {{ mission.radius }},
+                        color: '{{ mission.color }}',
+                        accent: '{{ mission.textColor }}',
+                        visibility: 0
+                    };
+                    {% for checkpoint in mission.checkpoints %}
+                        mapMarkers["checkpoint" + {{ checkpoint.id }}] = {
+                            id: {{ checkpoint.id }},
+                            title: "{{ checkpoint.title }}",
+                            content: "{{ checkpoint.content }}",
+                            location: [{{ checkpoint.latitude }},{{ checkpoint.longitude }}],
+                            radius: {{ checkpoint.radius }},
+                            color: '{{ checkpoint.color }}',
+                            accent: '{{ checkpoint.textColor }}',
+                            visibility: 0
+                        };
+
+                    {% endfor %}
+                {% endfor %}
             {% endfor %}
         }
 
-        function startStory(){
-            if(progressions[0].timeStarted == 0){
-                progressions[0].timeStarted = new Date().getTime();
-                saveProgression(progressions[0]);
+        function findNextProgression(){
+            var progression = null;
+            for(var i = 0; i < progressions.length; i++){
+                if(progressions[i].timeStarted != 0 && progressions[i].timeFinished == 0){
+                    progression = progressions[i];
+                }
             }
-            else{
-                saveProgression(progressions[0]);
-                setupStoryFromProgression();
+            //if no progressions have been started start the first one
+            if(progression == null){
+                progression = progressions[0];
+               // saveStartProgression(progression);
             }
+
+            $('#chapter'+ progression.chapterId ).removeClass('hidden');
+
+            $('.startChapter').on('click', function(){
+                startChapter($(this).data("chapter"));
+                $(this).attr("disabled", "true");
+            });
         }
 
       function setupStoryFromProgression(){
-          for(var i = 0; i < progressions.length; i++){
-              var progression = progressions[i];
+         findNextProgression();
+      }
 
-              if(progression.timeStarted != 0 && progression.timeFinished == 0){
-                  alert('should add chapter' + progression.chapterId);
-                  $('#chapter'+ progression.chapterId ).removeClass('hidden');
+      function startChapter(chapterId){
+          console.log('#chapter' + chapterId + ">.content");
+            $('#chapter' + chapterId + ">.content").removeClass("hidden");
+
+          //TODO find first Mission in chapter
+          var progression = null;
+          for(var i = 0; i < progressions.length; i++){
+                if(progressions[i].chapterId == chapterId && progressions[i].timeFinished == 0) {
+                    progression = progressions[i];
+                    break;
+              }
+          }
+          saveStartProgression(progression);
+
+          for(var i = 0; i < progressions.length; i++){
+              if(progressions[i].chapterId == chapterId && progressions[i].missionId != 0 && progressions[i].timeFinished == 0) {
+                  progression = progressions[i];
+                  break;
               }
           }
 
-          $('.startChapter').on('click', function(){
+          $('#mission' + progression.missionId ).removeClass('hidden');
 
+          $('#mission' + progression.missionId + ' .startMission').on('click', function(){
+              startMission(chapterId, $(this).data("mission"));
+              $(this).attr("disabled", "true");
+          })
+      }
+
+      function startMission(chapterId, missionId){
+          $('#mission' + missionId + ">.content").removeClass("hidden");
+
+          //TODO find first checkpoint in Mission
+          var progression = null;
+          for(var i = 0; i < progressions.length; i++){
+              if(progressions[i].chapterId == chapterId && progressions[i].missionId == missionId && progressions[i].timeFinished == 0) {
+                  progression = progressions[i];
+                  break;
+              }
+          }
+          saveStartProgression(progression);
+
+          for(var i = 0; i < progressions.length; i++){
+              if(progressions[i].chapterId == chapterId && progressions[i].missionId == missionId && progressions[i].checkpointId != 0 && progressions[i].timeFinished == 0) {
+                  progression = progressions[i];
+                  break;
+              }
+          }
+
+          console.log("add Marker to Map: " + "mission" + progression.missionId);
+          addMarkerToMap(mapMarkers["mission" + progression.missionId]);
+          $('#checkpoint' + progression.checkpointId ).removeClass('hidden');
+          console.log('#checkpoint' + progression.checkpointId + ' .startCheckpoint');
+          $('#checkpoint' + progression.checkpointId + ' .startCheckpoint').on('click', function(){
+              startCheckpoint(chapterId, missionId, $(this).data("checkpoint"));
+              $(this).attr("disabled", "true");
+          })
+      }
+
+      function addMarkerToMap(marker){
+          console.log("add Marker: " + marker.title + " " + marker.content);
+          L.circle(marker.location, marker.radius, {
+              color: marker.accent,
+              fillColor: marker.color,
+              fillOpacity: 0.6
+          }).addTo(map).bindPopup(marker.title);
+      }
+
+      function startCheckpoint(chapterId, missionId, checkpointId){
+          $('#checkpoint' + checkpointId + ">.content").removeClass("hidden");
+
+          //TODO find first checkpoint in Mission
+          var progression = null;
+          for(var i = 0; i < progressions.length; i++){
+              if(progressions[i].chapterId == chapterId
+                      && progressions[i].missionId == missionId
+                      && progressions[i].checkpointId == checkpointId
+                      && progressions[i].timeFinished == 0
+              ){
+                  progression = progressions[i];
+                  break;
+              }
+          }
+          saveStartProgression(progression);
+          console.log("add Marker to Map: " + "checkpoint" + progression.checkpointId);
+          /*$('#checkpoint' + progression.checkpointId ).removeClass('hidden');
+          console.log('#checkpoint' + progression.checkpointId + ' .startCheckpoint');
+          $('#checkpoint' + progression.checkpointId + ' .startCheckpoint').on('click', function(){
+              startCheckpoint(chapterId, missionId, $(this).data("checkpoint"));
+              $(this).attr("disabled", "true");
+          })*/
+          $('.foundCheckpoint').on('click', function(){
+              var checkpointId = $(this).data("checkpoint");
+              var marker = mapMarkers["checkpoint" + checkpointId];
+
+              if(measureDistance(userLocation, marker.location) < marker.radius) {
+                  addMarkerToMap(marker);
+                  $(this).attr("disable", "true");
+                  saveFinishedProgression(findCheckpointFromProgression(checkpointId))
+              }
           });
       }
 
+      function findCheckpointFromProgression(checkpointId){
+          for(var i = 0; i < progressions.length; i++){
+              var progression = progressions[i];
+              if(progression.checkpointId == checkpointId) {
+                  return progression;
+              }
+          }
+      }
+
+      function degToRad(value){
+          return value * (Math.PI / 180);
+      }
+
+      function measureDistance(location1, location2){
+          var R = 6371; // km
+          var dLat = degToRad(location2[0] - location1[0]);
+          var dLon = degToRad(location2[1] - location1[1]);
+          var lat1 = degToRad(location1[0]);
+          var lat2 = degToRad(location2[0]);
+
+          var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                  Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+          return R * c;
+      }
+
         function setupMap() {
-            var map = L.map('map').fitWorld();
+            map = L.map('map').fitWorld();
 
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -106,64 +254,61 @@
                 accessToken: 'pk.eyJ1IjoiZm94d2l6YXJkIiwiYSI6ImNpdjd5a3I3ZTAwMG0yb255NHN5b2NyajgifQ.PmTe7X9ZZGrmIXaN5vJoeg'
             }).addTo(map);
 
-            function Mission(title, content, location, radius, color, type) {
-                this.title = title;
-                this.content = content;
-                this.location = location;
-                this.radius = radius;
-                this.color = color;
-                this.type = type;
-            }
-
-            var mission = new Mission("Mission 1", "C'est ici que commencera votre premiere mission", [50.848375, 4.350823], 500, 'red', 0);
-
-            if (mission.type == 0) {
-                var circle = L.circle(mission.location, mission.radius, {
-                    color: mission.color,
-                    fillColor: '#f03',
-                    fillOpacity: 0.5
-                }).addTo(map).bindPopup(mission.content);
-            }
-
             map.on('locationfound', onLocationFound);
             map.on('locationerror', onLocationError);
             map.locate({setView: true, maxZoom: 16});
         }
 
         function onLocationFound(e) {
-            var radius = e.accuracy / 20;
+            userLocation = [e.latitude, e.longitude];
 
             L.marker(e.latlng).addTo(map)
-                    .bindPopup("You are within " + radius + " meters from this point").openPopup();
+                    .bindPopup("You are within " + e.accuracy + " meters from this point").openPopup();
 
-            L.circle(e.latlng, radius).addTo(map);
+            L.circle(e.latlng, e.accuracy).addTo(map);
         }
 
         function onLocationError(e) {
             alert(e.message);
         }
 
+        function saveStartProgression(progression){
+            progression.timeStarted = new Date().getTime();
+            saveProgression(progression);
+        }
+
+      function saveFinishedProgression(progression){
+          progression.timeFinished = new Date().getTime();
+          saveProgression(progression);
+      }
+
         function saveProgression(progression){
             $.ajax({
                 type: "POST",
                 url: Routing.generate('ajax'),
                 dataType: "json",
-//                data: "{progression: " + progression + "}",
                 data: '{' +
                     '"id":' + progression.id +
                     ', "timeStarted":' + progression.timeStarted +
                     ', "timeFinished":' + progression.timeFinished + "}",
                 success: function(response) {
-                    console.log(response);
+                    showMessage("Progress Saved!", "green");
                 }
             });
         }
 
+        function showMessage(message, color){
+            var messageDiv = $('#message');
+            messageDiv.text(message);
+            messageDiv.css("background-color", color);
+            messageDiv.show().delay(3000).fadeOut();
+        }
+
         jQuery(document).ready(function(){
 
-            convertProgression();
+            convertVariables();
             setupMap();
-            startStory();
+            setupStoryFromProgression();
 
             var detail = $('#detail');
 
@@ -178,22 +323,6 @@
                     detail.removeClass('overlay-closed');
                     $(this).text("-")
                 }
-            });
-
-            $('#addchapter').on('click', function(){
-
-            });
-
-            $('#ajax').on('click', function(){
-                $.ajax({
-                    type: "POST",
-                    url: Routing.generate('ajax'),
-                    dataType: "json",
-                    data: "",
-                    success: function(response) {
-                        console.log(response);
-                    }
-                });
             });
         });
     </script>

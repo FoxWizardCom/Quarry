@@ -21,7 +21,7 @@ class HintType extends AbstractType
             ->add('content', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'content',
-                    'rows' => '5',
+                    'rows' => '4',
                     'placeholder' => 'Write a little story'
                 )))
             ->add('number', NumberType::class, array(
@@ -42,9 +42,9 @@ class HintType extends AbstractType
                     'data-type' => 'textcolor',
                     'value' => '#000000'
                 )))
-            ->add('type', TextType::class, array(
-                'attr' => array('placeholder' => 'type')
-            ))
+//            ->add('type', TextType::class, array(
+//                'attr' => array('placeholder' => 'type')
+//            ))
             ->add('question', TextType::class, array(
                 'attr' => array('placeholder' => 'question')
             ))

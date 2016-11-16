@@ -2,6 +2,13 @@
     height: 93vh;
 }
 
+#message{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 109999;
+}
+
 #showDetail{
     position:absolute;
     top: 18%;
@@ -52,6 +59,11 @@
 
 .title{
     font-size: 1.5em;
+    width: 100%;
+}
+
+.content{
+
 }
 
 .overlay-closed {
@@ -72,4 +84,9 @@
 
 .hidden{
     display: none;
+}
+
+.startButton{
+    float:right;
+    margin-right: 24px;
 }

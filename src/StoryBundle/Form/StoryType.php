@@ -48,9 +48,9 @@ class StoryType extends AbstractType
                     'data-type' => 'textcolor',
                     'value' => '#000000'
                 )))
-            ->add('type', TextType::class, array(
-                'attr' => array('placeholder' => 'type')
-            ))
+//            ->add('type', TextType::class, array(
+//                'attr' => array('placeholder' => 'type')
+//            ))
             ->add('chapters', CollectionType::class, array(
                 'entry_type' => ChapterType::class,
                 'allow_add' => true,

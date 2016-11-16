@@ -69,12 +69,12 @@ abstract class StoryPart
      *
      * @ORM\Column(name="type", type="string", length=255)
      */
-    private $type;
+    private $type = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="number", type="integer")
+     * @ORM\Column(name="number", type="integer", nullable=true)
      */
     private $number;
 

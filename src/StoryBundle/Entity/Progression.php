@@ -91,14 +91,14 @@ class Progression
     /**
      * @var int
      *
-     * @ORM\Column(name="time_started", type="integer")
+     * @ORM\Column(name="time_started", type="bigint")
      */
     protected $timeStarted;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="time_finished", type="integer")
+     * @ORM\Column(name="time_finished", type="bigint")
      */
     protected $timeFinished;
 

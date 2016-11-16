@@ -43,9 +43,9 @@ class CheckpointType extends AbstractType
                     'data-type' => 'textcolor',
                     'value' => '#000000'
                 )))
-            ->add('type', TextType::class, array(
-                'attr' => array('placeholder' => 'type')
-            ))
+//            ->add('type', TextType::class, array(
+//                'attr' => array('placeholder' => 'type')
+//            ))
             ->add('latitude', TextType::class, array(
                 'attr' => array('placeholder' => 'latitude')
             ))

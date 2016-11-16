@@ -23,7 +23,7 @@ class ChapterType extends AbstractType
             ->add('content', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'content',
-                    'rows' => '4',
+                    'rows' => '3',
                     'placeholder' => 'Write a chapter intro...'
             )))
             ->add('number', NumberType::class, array(
@@ -44,9 +44,9 @@ class ChapterType extends AbstractType
                     'data-type' => 'textcolor',
                     'value' => '#000000'
                 )))
-            ->add('type', TextType::class, array(
-                'attr' => array('placeholder' => 'type')
-            ))
+//            ->add('type', TextType::class, array(
+//                'attr' => array('placeholder' => 'type')
+//            ))
             ->add('missions', CollectionType::class, array(
                 'entry_type' => MissionType::class,
                 'allow_add' => true,

@@ -24,7 +24,7 @@ class MissionType extends AbstractType
             ->add('content', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'content',
-                    'rows' => '5',
+                    'rows' => '4',
                     'placeholder' => 'Write a little story'
                 )))
             ->add('number', NumberType::class, array(
@@ -45,9 +45,9 @@ class MissionType extends AbstractType
                     'data-type' => 'textcolor',
                     'value' => '#000000'
                 )))
-            ->add('type', TextType::class, array(
-                'attr' => array('placeholder' => 'type')
-            ))
+//            ->add('type', TextType::class, array(
+//                'attr' => array('placeholder' => 'type')
+//            ))
             ->add('latitude', TextType::class, array(
                 'attr' => array('placeholder' => 'latitude')
             ))
