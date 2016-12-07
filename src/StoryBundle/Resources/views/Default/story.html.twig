@@ -20,17 +20,21 @@
             <div class="content">{{ story.content }}</div>
                 {% for chapter in story.chapters %}
                         <div id="chapter{{ chapter.id }}" class="chapter hidden" style="background-color:{{ chapter.color }}; color:{{ chapter.textColor }};">
-                            <p class="title">Chapter {{ chapter.number }}: {{ chapter.title }} <button class="startChapter" data-chapter="{{ chapter.id }}">Start Chapter</button></p>
-                            <p class="content hidden">{{ chapter.content|raw }}</p>
+                            <p class="title">Chapter {{ chapter.number }}: {{ chapter.title }}</p>
+                            <p class="content">{{ chapter.content|raw }}</p>
                                 {% for mission in chapter.missions %}
                                     <div id="mission{{ mission.id }}" data-chapter="{{ chapter.id }}" class="mission hidden" style="background-color:{{ mission.color }}; color:{{ mission.textColor }};">
-                                        <p class="title">Mission {{ mission.number }}: {{ mission.title }} <button class="startMission" data-mission="{{ mission.id }}">Start Mission</button></p>
-                                        <p class="content hidden">{{ mission.content }}</p>
+                                        <p class="title">Mission {{ mission.number }}<div class="title hidden">{{ mission.title }}</div></p>
+                                        <p class="content">{{ mission.content }}</p>
                                             {% for checkpoint in mission.checkpoints %}
                                                     <div id="checkpoint{{ checkpoint.id }}" data-chapter="{{ chapter.id }}" data-mission="{{ mission.id }}" class="checkpoint hidden" style="background-color:{{ checkpoint.color }}; color:{{ checkpoint.textColor }};">
-                                                        <p class="title">Checkpoint {{ checkpoint.number }}: {{ checkpoint.title }} <button class="startCheckpoint" data-checkpoint="{{ checkpoint.id }}">Start Checkpoint</button></p>
-                                                        <p class="content hidden">{{ checkpoint.content }}
-                                                            <button class="foundCheckpoint" data-checkpoint="{{ checkpoint.id }}">Found Checkpoint</button>
+                                                        <p class="title">Checkpoint {{ checkpoint.number }}: {{ checkpoint.title }}</p>
+                                                        {% for hint in checkpoint.hints %}
+                                                            <div id="hint{{ hint.id }}" data-chapter="{{ chapter.id }}" data-mission="{{ mission.id }}" data-checkpoint="{{ checkpoint.id }}" class="hint hidden" style="background-color:{{ checkpoint.color }}; color:{{ checkpoint.textColor }};">
+                                                            <b><u>Hint</u> {{ hint.title }} : </b> {{ hint.content }}
+                                                            </div>
+                                                        {% endfor %}
+                                                        <p class="content">{{ checkpoint.content }}
                                                         </p>
                                                         </div>
                                             {% endfor %}
@@ -38,6 +42,7 @@
                                 {% endfor %}
                         </div>
                 {% endfor %}
+            <button id="continueBtn">Continue</button>
             </div>
         </div>
     <script>
@@ -46,9 +51,9 @@
       var mapMarkers = [];
 
       var map;
-      var userLocation;
+      var userMarker;
 
-        function convertVariables(){
+      function convertVariables(){
             {% for progression in progressions %}
                 progressions.push({
                        // userStoryId: {{ progression.userStory.id }},
@@ -72,7 +77,7 @@
                         color: '{{ mission.color }}',
                         accent: '{{ mission.textColor }}',
                         visibility: 0
-                    };
+                         };
                     {% for checkpoint in mission.checkpoints %}
                         mapMarkers["checkpoint" + {{ checkpoint.id }}] = {
                             id: {{ checkpoint.id }},
@@ -90,7 +95,7 @@
             {% endfor %}
         }
 
-        function findNextProgression(){
+      /*  function findNextProgression(){
             var progression = null;
             for(var i = 0; i < progressions.length; i++){
                 if(progressions[i].timeStarted != 0 && progressions[i].timeFinished == 0){
@@ -109,10 +114,47 @@
                 startChapter($(this).data("chapter"));
                 $(this).attr("disabled", "true");
             });
-        }
+        }*/
+
+      var currentProgressionIndex;
 
       function setupStoryFromProgression(){
-         findNextProgression();
+          currentProgressionIndex = findCurrentProgressionIndex();
+          var currentProgression = progressions[currentProgressionIndex];
+          showStoryFromProgression(currentProgression);
+      }
+
+      function showStoryFromProgression(currentProgression){
+          //TODO check if progression is Chapter Mission or Checkpoint and show html content accordingly
+          console.log(currentProgression);
+
+          if(currentProgression != null) {
+              if (currentProgression.chapterId != 0) {
+                  var chapterId = currentProgression.chapterId;
+                  console.log("show Chapter " + chapterId );
+                  $('#chapter' + chapterId).removeClass("hidden");
+                  if (currentProgression.missionId != 0) {
+                      var missionId = currentProgression.missionId;
+                      console.log("show Mission " + missionId);
+                      $('#mission' + missionId ).removeClass('hidden');
+                      if (currentProgression.checkpointId != 0) {
+                          var checkpointId = currentProgression.checkpointId;
+                          console.log("show Checkpoint " + checkpointId);
+                          $('#checkpoint' + checkpointId).removeClass('hidden');
+                      }
+                  }
+              }
+          }
+      }
+
+      function findCurrentProgressionIndex(){
+          var progressionIndex = null;
+          for(var i = 0; i < progressions.length; i++){
+              if(progressions[i].timeStarted != 0 && progressions[i].timeFinished == 0) {
+                  progressionIndex = i;
+              }
+          }
+          return progressionIndex;
       }
 
       function startChapter(chapterId){
@@ -146,6 +188,7 @@
 
       function startMission(chapterId, missionId){
           $('#mission' + missionId + ">.content").removeClass("hidden");
+          $('#mission' + missionId + " .title").removeClass("hidden");
 
           //TODO find first checkpoint in Mission
           var progression = null;
@@ -184,8 +227,8 @@
       }
 
       function startCheckpoint(chapterId, missionId, checkpointId){
-          $('#checkpoint' + checkpointId + ">.content").removeClass("hidden");
-
+          $('#checkpoint' + checkpointId + " .hint").removeClass("hidden");
+          $('#checkpoint' + checkpointId + " .foundCheckpoint").removeClass("hidden");
           //TODO find first checkpoint in Mission
           var progression = null;
           for(var i = 0; i < progressions.length; i++){
@@ -206,14 +249,22 @@
               startCheckpoint(chapterId, missionId, $(this).data("checkpoint"));
               $(this).attr("disabled", "true");
           })*/
-          $('.foundCheckpoint').on('click', function(){
+          $('#checkpoint' + checkpointId + ' .foundCheckpoint').on('click', function(){
               var checkpointId = $(this).data("checkpoint");
               var marker = mapMarkers["checkpoint" + checkpointId];
 
-              if(measureDistance(userLocation, marker.location) < marker.radius) {
-                  addMarkerToMap(marker);
+           //  TODO measure distance// if(measureDistance(userMarker.getLatLng(), marker.location) < marker.radius) {
+              if(checkpointId == 13){
+              addMarkerToMap(marker);
+                  alert("felicitations! vous avez trouvé le Checkpoint!");
+                  //TODO startNextCheckpoint DIRTy AS FUCK!
+                  $('#checkpoint14').removeClass('hidden');
+                  startCheckpoint(chapterId, missionId, 14);
+                  $('#checkpoint' + checkpointId + ">.content").removeClass("hidden");
                   $(this).attr("disable", "true");
                   saveFinishedProgression(findCheckpointFromProgression(checkpointId))
+              }else{
+                  alert("Vous êtes trop loin du Checkpoint, rapprochez vous!");
               }
           });
       }
@@ -241,39 +292,71 @@
           var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
                   Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
           var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+          console.log("DISTANCE BETWEEN TWO LOCATIONS: " + R * c);
           return R * c;
       }
 
+     /* function areMarkersTouching(marker){
+
+          if(marker.circle.getBounds().contains(userMarker)){
+              console.log('in');
+              return true;
+          }else{
+console.log('out');
+              return false;
+          }
+      }
+*/
         function setupMap() {
             map = L.map('map').fitWorld();
 
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                 maxZoom: 18,
-                id: 'mapbox.pencil',
+                id: 'mapbox.streets',
                 accessToken: 'pk.eyJ1IjoiZm94d2l6YXJkIiwiYSI6ImNpdjd5a3I3ZTAwMG0yb255NHN5b2NyajgifQ.PmTe7X9ZZGrmIXaN5vJoeg'
             }).addTo(map);
 
+            userMarker = L.marker([0,0]);
+            userMarker.addTo(map);
+
             map.on('locationfound', onLocationFound);
             map.on('locationerror', onLocationError);
-            map.locate({setView: true, maxZoom: 16});
+            map.locate({setView: true, maxZoom: 15});
+
+            setupMarkers();
+
+            setInterval(function() {
+                map.on('locationfound', onLocationFound);
+                map.on('locationerror', onLocationError);
+                map.locate({setView: false, maxZoom: 16});
+            }, 10 * 1000); // 60 * 1000 milsec
+        }
+
+        var leafletMapMarkers = {};
+
+        function setupMarkers(){
+            var circle;
+            console.log(mapMarkers);
+            for(var mapMarker in mapMarkers) {
+                console.log(mapMarker);
+                circle = L.circle(mapMarker.location, mapMarker.radius);
+                circle.addTo(map)
+                leafletMapMarkers[mapMarker.id] = circle;
+            }
+
         }
 
         function onLocationFound(e) {
-            userLocation = [e.latitude, e.longitude];
-
-            L.marker(e.latlng).addTo(map)
-                    .bindPopup("You are within " + e.accuracy + " meters from this point").openPopup();
-
-            L.circle(e.latlng, e.accuracy).addTo(map);
+            userMarker.setLatLng(e.latlng);
         }
 
         function onLocationError(e) {
-            alert(e.message);
+            //alert(e.message);
         }
 
         function saveStartProgression(progression){
-            progression.timeStarted = new Date().getTime();
+           progression.timeStarted = new Date().getTime();
             saveProgression(progression);
         }
 
@@ -297,6 +380,23 @@
             });
         }
 
+        function setupDetailOverlay(){
+            var detail = $('#detail');
+
+            $('#showDetail').on('click', function() {
+                console.log("button clicked");
+                if (detail.hasClass('overlay-open')){
+                    detail.removeClass('overlay-open');
+                    detail.addClass('overlay-closed');
+                    $(this).text("+")
+                }else{
+                    detail.addClass('overlay-open');
+                    detail.removeClass('overlay-closed');
+                    $(this).text("-")
+                }
+            });
+        }
+
         function showMessage(message, color){
             var messageDiv = $('#message');
             messageDiv.text(message);
@@ -308,21 +408,18 @@
 
             convertVariables();
             setupMap();
+            setupDetailOverlay();
             setupStoryFromProgression();
 
-            var detail = $('#detail');
-
-            $('#showDetail').on('click', function() {
-                console.log("button clicked");
-                if (detail.hasClass('overlay-open')){
-                    detail.removeClass('overlay-open');
-                    detail.addClass('overlay-closed');
-                    $(this).text("+")
-               }else{
-                    detail.addClass('overlay-open');
-                    detail.removeClass('overlay-closed');
-                    $(this).text("-")
+            $("#continueBtn").on("click", function(){
+                //TODO check if mission or checkpoint and check distance before passing onto next part
+                //TODO once all subparts are done, saveFinishProgression();
+                var currentProgression = progressions[currentProgressionIndex++];
+                if(currentProgression.missionId != 0){
+                 //   areMarkersTouching(mapMarkers["mission" + currentProgression.missionId]);
                 }
+                showStoryFromProgression(currentProgression);
+                saveStartProgression(currentProgression);
             });
         });
     </script>
