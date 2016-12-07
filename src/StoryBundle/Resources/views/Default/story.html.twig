@@ -48,7 +48,7 @@
     <script>
 
       var progressions = [];
-      var mapMarkers = [];
+      var mapMarkers = new Map();
 
       var map;
       var userMarker;
@@ -64,35 +64,66 @@
                         timeStarted: {{ progression.timeStarted }},
                         timeFinished: {{ progression.timeFinished }}
                 });
+          console.log(progressions);
             {% endfor %}
-
+            var mapMarkerId;
+            var mapMarkerObject;
             {% for chapter in story.chapters %}
                 {% for mission in chapter.missions %}
-                    mapMarkers["mission" + {{ mission.id }}] = {
-                        id: {{ mission.id }},
-                        title: "{{ mission.title }}",
-                        content: "{{ mission.content }}",
-                        location: [{{ mission.latitude }},{{ mission.longitude }}],
-                        radius: {{ mission.radius }},
-                        color: '{{ mission.color }}',
-                        accent: '{{ mission.textColor }}',
-                        visibility: 0
-                         };
-                    {% for checkpoint in mission.checkpoints %}
-                        mapMarkers["checkpoint" + {{ checkpoint.id }}] = {
-                            id: {{ checkpoint.id }},
-                            title: "{{ checkpoint.title }}",
-                            content: "{{ checkpoint.content }}",
-                            location: [{{ checkpoint.latitude }},{{ checkpoint.longitude }}],
-                            radius: {{ checkpoint.radius }},
-                            color: '{{ checkpoint.color }}',
-                            accent: '{{ checkpoint.textColor }}',
-                            visibility: 0
-                        };
+           mapMarkerId = "mission" + {{ mission.id }};
+           mapMarkerObject = {
+              id: {{ mission.id }},
+              title: "{{ mission.title }}",
+              content: "{{ mission.content }}",
+              latitude: {{ mission.latitude }},
+              longitude: {{ mission.longitude }},
+              radius: {{ mission.radius }},
+              color: '{{ mission.color }}',
+              accent: '{{ mission.textColor }}',
+              visibility: 0
+          };
+             mapMarkers.set(mapMarkerId, mapMarkerObject);
+                    {#mapMarkers["mission" + {{ mission.id }}] = {#}
+                        {#id: {{ mission.id }},#}
+                        {#title: "{{ mission.title }}",#}
+                        {#content: "{{ mission.content }}",#}
+                        {#latitude: {{ mission.latitude }},#}
+                        {#longitude: {{ mission.longitude }},#}
+                        {#radius: {{ mission.radius }},#}
+                        {#color: '{{ mission.color }}',#}
+                        {#accent: '{{ mission.textColor }}',#}
+                        {#visibility: 0#}
+                         {#};#}
 
+                    {% for checkpoint in mission.checkpoints %}
+                     mapMarkerId = "checkpoint" + {{ checkpoint.id }};
+                     mapMarkerObject = {
+                        id: {{ checkpoint.id }},
+                        title: "{{ checkpoint.title }}",
+                        content: "{{ checkpoint.content }}",
+                        latitude: {{ checkpoint.latitude }},
+                        longitude: {{ checkpoint.longitude }},
+                        radius: {{ checkpoint.radius }},
+                        color: '{{ checkpoint.color }}',
+                        accent: '{{ checkpoint.textColor }}',
+                        visibility: 0
+                    };
+                     mapMarkers.set(mapMarkerId, mapMarkerObject);
+                        {#mapMarkers["checkpoint" + {{ checkpoint.id }}] = {#}
+                            {#id: {{ checkpoint.id }},#}
+                            {#title: "{{ checkpoint.title }}",#}
+                            {#content: "{{ checkpoint.content }}",#}
+                            {#latitude: {{ checkpoint.latitude }},#}
+                            {#longitude: {{ checkpoint.longitude }},#}
+                            {#radius: {{ checkpoint.radius }},#}
+                            {#color: '{{ checkpoint.color }}',#}
+                            {#accent: '{{ checkpoint.textColor }}',#}
+                            {#visibility: 0#}
+                        {#};#}
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
+          console.log("fill list from BACK : " + mapMarkers.length);
         }
 
       /*  function findNextProgression(){
@@ -157,7 +188,7 @@
           return progressionIndex;
       }
 
-      function startChapter(chapterId){
+     /* function startChapter(chapterId){
           console.log('#chapter' + chapterId + ">.content");
             $('#chapter' + chapterId + ">.content").removeClass("hidden");
 
@@ -215,17 +246,17 @@
               startCheckpoint(chapterId, missionId, $(this).data("checkpoint"));
               $(this).attr("disabled", "true");
           })
-      }
+      }*/
 
       function addMarkerToMap(marker){
           console.log("add Marker: " + marker.title + " " + marker.content);
-          L.circle(marker.location, marker.radius, {
+          L.circle([marker.latitude, marker.longitude], marker.radius, {
               color: marker.accent,
               fillColor: marker.color,
               fillOpacity: 0.6
           }).addTo(map).bindPopup(marker.title);
       }
-
+/*
       function startCheckpoint(chapterId, missionId, checkpointId){
           $('#checkpoint' + checkpointId + " .hint").removeClass("hidden");
           $('#checkpoint' + checkpointId + " .foundCheckpoint").removeClass("hidden");
@@ -248,13 +279,12 @@
           $('#checkpoint' + progression.checkpointId + ' .startCheckpoint').on('click', function(){
               startCheckpoint(chapterId, missionId, $(this).data("checkpoint"));
               $(this).attr("disabled", "true");
-          })*/
+          })*
           $('#checkpoint' + checkpointId + ' .foundCheckpoint').on('click', function(){
               var checkpointId = $(this).data("checkpoint");
               var marker = mapMarkers["checkpoint" + checkpointId];
 
-           //  TODO measure distance// if(measureDistance(userMarker.getLatLng(), marker.location) < marker.radius) {
-              if(checkpointId == 13){
+           if(measureDistance(userMarker.getLatLng(), [marker.latitude, marker.longitude]) < marker.radius) {
               addMarkerToMap(marker);
                   alert("felicitations! vous avez trouvé le Checkpoint!");
                   //TODO startNextCheckpoint DIRTy AS FUCK!
@@ -276,13 +306,16 @@
                   return progression;
               }
           }
-      }
+      }*/
 
       function degToRad(value){
           return value * (Math.PI / 180);
       }
 
       function measureDistance(location1, location2){
+          console.log("locationCoords: " + "," + location1[0] + "," + location1[1]
+                  + "," + location2[0]
+                  + "," + location2[1]);
           var R = 6371; // km
           var dLat = degToRad(location2[0] - location1[0]);
           var dLon = degToRad(location2[1] - location1[1]);
@@ -324,7 +357,7 @@ console.log('out');
             map.on('locationerror', onLocationError);
             map.locate({setView: true, maxZoom: 15});
 
-            setupMarkers();
+          //  setupMarkers();
 
             setInterval(function() {
                 map.on('locationfound', onLocationFound);
@@ -333,19 +366,16 @@ console.log('out');
             }, 10 * 1000); // 60 * 1000 milsec
         }
 
-        var leafletMapMarkers = {};
-
-        function setupMarkers(){
+      /*  function setupMarkers(){
             var circle;
             console.log(mapMarkers);
             for(var mapMarker in mapMarkers) {
                 console.log(mapMarker);
-                circle = L.circle(mapMarker.location, mapMarker.radius);
-                circle.addTo(map)
-                leafletMapMarkers[mapMarker.id] = circle;
+                circle = L.circle([mapMarker.latitude, mapMarker.longitude], mapMarker.radius);
+                circle.addTo(map);
             }
 
-        }
+        }*/
 
         function onLocationFound(e) {
             userMarker.setLatLng(e.latlng);
@@ -415,8 +445,21 @@ console.log('out');
                 //TODO check if mission or checkpoint and check distance before passing onto next part
                 //TODO once all subparts are done, saveFinishProgression();
                 var currentProgression = progressions[currentProgressionIndex++];
-                if(currentProgression.missionId != 0){
-                 //   areMarkersTouching(mapMarkers["mission" + currentProgression.missionId]);
+                console.log(mapMarkers);
+                if(currentProgression.missionId != 0  && currentProgression.checkpointId == 0){
+
+                 var marker = mapMarkers.get("mission" + currentProgression.missionId);
+                    if(measureDistance([userMarker.getLatLng().lat, userMarker.getLatLng().lng], [marker.latitude, marker.longitude]) < marker.radius) {
+                        addMarkerToMap(marker);
+                        alert("felicitations! vous avez trouvé la mission Checkpoint!");
+                    }
+                }
+                else if(currentProgression.missionId != 0 && currentProgression.checkpointId != 0){
+                    var marker = mapMarkers.get("checkpoint" + currentProgression.checkpointId);
+                    if(measureDistance([userMarker.getLatLng().lat, userMarker.getLatLng().lng], [marker.latitude, marker.longitude]) < marker.radius) {
+                        addMarkerToMap(marker);
+                        alert("felicitations! vous avez trouvé le Checkpoint!");
+                    }
                 }
                 showStoryFromProgression(currentProgression);
                 saveStartProgression(currentProgression);
