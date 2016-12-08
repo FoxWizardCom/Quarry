@@ -444,25 +444,41 @@ console.log('out');
             $("#continueBtn").on("click", function(){
                 //TODO check if mission or checkpoint and check distance before passing onto next part
                 //TODO once all subparts are done, saveFinishProgression();
-                var currentProgression = progressions[currentProgressionIndex++];
-                console.log(mapMarkers);
-                if(currentProgression.missionId != 0  && currentProgression.checkpointId == 0){
 
-                 var marker = mapMarkers.get("mission" + currentProgression.missionId);
-                    if(measureDistance([userMarker.getLatLng().lat, userMarker.getLatLng().lng], [marker.latitude, marker.longitude]) < marker.radius) {
+                var nextProgression = progressions[currentProgressionIndex+1];
+                console.log(mapMarkers);
+                if(nextProgression.missionId != 0  && nextProgression.checkpointId == 0){
+                    alert("new mission");
+                 var marker = mapMarkers.get("mission" + nextProgression.missionId);
+                    if(measureDistance([userMarker.getLatLng().lat, userMarker.getLatLng().lng], [marker.latitude, marker.longitude])*1000 < marker.radius) {
                         addMarkerToMap(marker);
-                        alert("felicitations! vous avez trouvé la mission Checkpoint!");
+                        alert("felicitations! vous avez trouvé la Mission!");
+                        showStoryFromProgression(nextProgression);
+                        saveStartProgression(nextProgression);
+                        currentProgressionIndex++;
+                    } else{
+                        alert("felicitations! mais trop loin");
                     }
                 }
-                else if(currentProgression.missionId != 0 && currentProgression.checkpointId != 0){
-                    var marker = mapMarkers.get("checkpoint" + currentProgression.checkpointId);
-                    if(measureDistance([userMarker.getLatLng().lat, userMarker.getLatLng().lng], [marker.latitude, marker.longitude]) < marker.radius) {
+                else if(nextProgression.missionId != 0 && nextProgression.checkpointId != 0){
+                    alert("new checkpoint");
+                    var marker = mapMarkers.get("checkpoint" + nextProgression.checkpointId);
+                    if(measureDistance([userMarker.getLatLng().lat, userMarker.getLatLng().lng], [marker.latitude, marker.longitude])*1000 < marker.radius) {
                         addMarkerToMap(marker);
                         alert("felicitations! vous avez trouvé le Checkpoint!");
+                        showStoryFromProgression(nextProgression);
+                        saveStartProgression(nextProgression);
+                        currentProgressionIndex++;
+                    } else{
+                        alert("felicitations! mais trop loin");
                     }
                 }
-                showStoryFromProgression(currentProgression);
-                saveStartProgression(currentProgression);
+                else if(nextProgression.missionId == 0 && nextProgression.checkpointId == 0) {
+                    alert("new chapter");
+                    showStoryFromProgression(nextProgression);
+                    saveStartProgression(nextProgression);
+                    currentProgressionIndex++;
+                }
             });
         });
     </script>

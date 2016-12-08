@@ -63,10 +63,10 @@
       <file leaf-file-name="story.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/story.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="464" column="57" selection-start-line="464" selection-start-column="57" selection-end-line="464" selection-end-column="57" />
+            <state relative-caret-position="58">
+              <caret line="458" column="22" selection-start-line="458" selection-start-column="22" selection-end-line="458" selection-end-column="22" />
               <folding>
-                <marker date="1481154635846" expanded="true" signature="16898:16904" ph="©" />
+                <marker date="1481156021918" expanded="true" signature="16898:16904" ph="©" />
               </folding>
             </state>
           </provider>
@@ -600,7 +600,7 @@
       <workItem from="1479944014677" duration="1468000" />
       <workItem from="1480280465908" duration="14198000" />
       <workItem from="1480430501780" duration="9710000" />
-      <workItem from="1481126662029" duration="11983000" />
+      <workItem from="1481126662029" duration="13342000" />
     </task>
     <task id="LOCAL-00001" summary="User: registration, login, validation, profile show and profile edit">
       <created>1477059364655</created>
@@ -707,11 +707,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481126874621</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fixed measureDistance between locations in Story.html.twig">
+      <created>1481154735831</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1481154735831</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="398914000" />
+    <option name="totallyTimeSpent" value="400273000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -730,6 +737,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14453782" sideWeight="0.5461422" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.078668684" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.4924357" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14453782" sideWeight="0.45385778" order="9" side_tool="false" content_ui="tabs" />
@@ -742,7 +750,6 @@
       <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33613446" sideWeight="0.47881997" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.4924357" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -795,7 +802,8 @@
     <MESSAGE value="Save Progress with ajax calls" />
     <MESSAGE value="setup checkpoints in Story" />
     <MESSAGE value="changed &quot;Gameplay&quot;  for story.html.twig" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed &quot;Gameplay&quot;  for story.html.twig" />
+    <MESSAGE value="fixed measureDistance between locations in Story.html.twig" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed measureDistance between locations in Story.html.twig" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1372,10 +1380,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StoryBundle/Resources/views/Default/story.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="464" column="57" selection-start-line="464" selection-start-column="57" selection-end-line="464" selection-end-column="57" />
+        <state relative-caret-position="58">
+          <caret line="458" column="22" selection-start-line="458" selection-start-column="22" selection-end-line="458" selection-end-column="22" />
           <folding>
-            <marker date="1481154635846" expanded="true" signature="16898:16904" ph="©" />
+            <marker date="1481156021918" expanded="true" signature="16898:16904" ph="©" />
           </folding>
         </state>
       </provider>
